@@ -13,7 +13,7 @@ class Program
 
     static void Main(string[] args)
     {
-        courses.Add(new course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
+        courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
         courses.Add(new Course(2, "Introduction to SQL Server", "Learn SQL Server basics", "Prof.Johnson", 25, 0, "Database"));
         courses.Add(new Course(3, "Web Development with ASP.NET Core", "Build web applications using ASP.NET Core", "Prof.Williams", 20, 0, "Web Development"));
         courses.Add(new Course(4, "Advanced C# Techniques", "Explore advanced C# programming concepts", "Prof.Brown", 15, 0, "Programming"));
@@ -38,21 +38,72 @@ class Program
 
             switch (userInput)
             {
-                case "1":
-                    Login();
-                    break;
-                case "2":
-                    Register();
-                    break;
-                case "3":
-                    Printcourses();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice");
-                    break;
+                case "1": Login();break;
+                case "2":Register();break;
+                case "3": Printcourses();break;
+                default:Console.WriteLine("Invalid choice");break;
             }
         }
     }
+    static void BrowseAndEnrollCourses()
+    {
+        if (currentUser.Role != "Student")
+        {
+            Console.WriteLine("Only students can enroll in courses.");
+            return;
+        }
+        if(courses.Count==0)
+        { 
+            Console.WriteLine("No Courses available");
+            return;
+        }
+        Console.WriteLine("/n===Available Courses===");
+        for (int i = 0; i < courses.Count; i++) 
+        {
+                    Console.WriteLine($"{i + 1}. {courses[i].Title}");
+                    Console.WriteLine($"   Category: {courses[i].Category}");
+                    Console.WriteLine($"   Enrolled: {courses[i].CurrentEnrollments}/{courses[i].MaxStudents}");
+                    Console.WriteLine();
+        }
+
+                Console.Write("Enter course number to enroll: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int courseNumber))
+                {
+                    Console.WriteLine("Invalid input.");
+                    return;
+                }
+
+                if (courseNumber < 1 || courseNumber > courses.Count)
+                {
+                    Console.WriteLine("Invalid course number.");
+                    return;
+                }
+
+                Course selectedCourse = courses[courseNumber - 1];
+
+        if (!selectedCourse.CanEnroll())
+        {
+            Console.WriteLine("This course is full.");
+            return;
+        }
+               
+        bool alreadyEnrolled = enrollments.Any(e => e.StudentUsername == currentUser.Username && e.CourseTitle == selectedCourse.Title);
+
+                if (alreadyEnrolled)
+                {
+                    Console.WriteLine("You are already enrolled in this course.");
+                    return;
+                }
+                Enrollment newEnrollment = new Enrollment(currentUser.Username,selectedCourse.Title,DateTime.Now);
+                enrollments.Add(newEnrollment);
+                selectedCourse.IncrementEnrollment();
+
+                Console.WriteLine("Enrollment successful!");
+            }
+
+
+        
 
 
 
@@ -60,15 +111,8 @@ class Program
     
 
 
-        static void Printcourses()
-    {
-        Console.Write("===Enter Available Courses===");
-        for (int i = 0; i < Courses.Length; i++)
-        {
-            Console.WriteLine($"{i + 1}. {Courses[i]}");
-        }
-        Searchcourses();
-    }
+   
+    
     static void Register()
     {
         Console.WriteLine("===Register===");
@@ -128,42 +172,8 @@ class Program
             string newEmail = Console.ReadLine();
         }
     }
-    static void Searchcourses()
-    {
-        Console.WriteLine("Enter Search Keyword");
-        string keyword = Console.ReadLine();
-        int browsecounter = 0;
-        bool found = false;
-        if (keyword != null) ;
-        {
-            Console.WriteLine("Courses found:");
-            foreach (var course in courses)
-            {
-                if (course.Contains(keyword, StringComparison.OrdinalIgnoreCase)) ;
-                {
-                    browsecounter++;
-                    Console.WriteLine($"{browsecounter}.{course}");
-                    found = true;
-                }
-                if (!found) ;
-                {
-                    Console.WriteLine("No courses matching the keyword.");
-                }
-                Console.WriteLine("Would you try again?(y/n) ");
-                string tryagain = Console.ReadLine();
-                switch (tryagain)
-                {
-                    case "y":
-                        Searchcourses();
-                        break;
-                    case "n":
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
+    
+    
     static void Login()
     {
         Console.Write("Enter username:");
@@ -174,10 +184,12 @@ class Program
             Console.WriteLine("Username not found. Please register first.");
             return;
         }
+        
         Console.Write("Enter password:");
         string password = Console.ReadLine();
         if (foundUser.ValidatePassword(password)) ;
-        { isLoggedIn = true; }
+        { isLoggedIn = true;
+        currentUser=}
         Console.Write("Enter role");
         string role = Console.ReadLine();
         Console.Write("Enter session state : (isloggedin/currentUser/currentROLE)");
