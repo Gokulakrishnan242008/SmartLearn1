@@ -8,6 +8,7 @@ namespace SmartLearn
     
     public class Course
     {
+        public int CourseId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string InstructorName { get; set; }
@@ -16,8 +17,9 @@ namespace SmartLearn
         public string Category { get; set; }
 
 
-        public Course(string title, string description, string instructorName, int maxStudents,int currentEnrollments,string category)
+        public Course(int courseId,string title, string description, string instructorName, int maxStudents,int currentEnrollments,string category)
         {
+            courseId = CourseId;
             Title = title;
             Description = description;
             InstructorName = instructorName;
@@ -27,6 +29,7 @@ namespace SmartLearn
         }
         public void DisplayInfo()
         {
+            Console.WriteLine($"CourseId:{CourseId}");
             Console.WriteLine($"Title: {Title}");
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"InstructorName: {InstructorName}");

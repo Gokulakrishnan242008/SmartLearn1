@@ -10,7 +10,8 @@ class Program
     static List<User> users = new List<User>();
     static List<Course> courses = new List<Course>();
     static List<Enrollment> enrollments = new List<Enrollment>();
-
+    static bool isLoggedIn = false;
+    static User currentUser=null;
     static void Main(string[] args)
     {
         courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
@@ -18,6 +19,7 @@ class Program
         courses.Add(new Course(3, "Web Development with ASP.NET Core", "Build web applications using ASP.NET Core", "Prof.Williams", 20, 0, "Web Development"));
         courses.Add(new Course(4, "Advanced C# Techniques", "Explore advanced C# programming concepts", "Prof.Brown", 15, 0, "Programming"));
         courses.Add(new Course(5, "Database Design and Management", "Learn database design principles", "Prof.Jones", 30, 0, "Database"));
+
         bool running = true;
         while (running)
             running = ShowMainMenu();
@@ -28,6 +30,7 @@ class Program
         Console.WriteLine("====================================");
         Console.WriteLine("Welcome to SmartLearn LMS");
         Console.WriteLine("====================================");
+        return true;
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
         Console.WriteLine("3.Browse Courses");
@@ -44,75 +47,6 @@ class Program
                 default:Console.WriteLine("Invalid choice");break;
             }
         }
-    }
-    static void BrowseAndEnrollCourses()
-    {
-        if (currentUser.Role != "Student")
-        {
-            Console.WriteLine("Only students can enroll in courses.");
-            return;
-        }
-        if(courses.Count==0)
-        { 
-            Console.WriteLine("No Courses available");
-            return;
-        }
-        Console.WriteLine("/n===Available Courses===");
-        for (int i = 0; i < courses.Count; i++) 
-        {
-                    Console.WriteLine($"{i + 1}. {courses[i].Title}");
-                    Console.WriteLine($"   Category: {courses[i].Category}");
-                    Console.WriteLine($"   Enrolled: {courses[i].CurrentEnrollments}/{courses[i].MaxStudents}");
-                    Console.WriteLine();
-        }
-
-                Console.Write("Enter course number to enroll: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int courseNumber))
-                {
-                    Console.WriteLine("Invalid input.");
-                    return;
-                }
-
-                if (courseNumber < 1 || courseNumber > courses.Count)
-                {
-                    Console.WriteLine("Invalid course number.");
-                    return;
-                }
-
-                Course selectedCourse = courses[courseNumber - 1];
-
-        if (!selectedCourse.CanEnroll())
-        {
-            Console.WriteLine("This course is full.");
-            return;
-        }
-               
-        bool alreadyEnrolled = enrollments.Any(e => e.StudentUsername == currentUser.Username && e.CourseTitle == selectedCourse.Title);
-
-                if (alreadyEnrolled)
-                {
-                    Console.WriteLine("You are already enrolled in this course.");
-                    return;
-                }
-                Enrollment newEnrollment = new Enrollment(currentUser.Username,selectedCourse.Title,DateTime.Now);
-                enrollments.Add(newEnrollment);
-                selectedCourse.IncrementEnrollment();
-
-                Console.WriteLine("Enrollment successful!");
-            }
-
-
-        
-
-
-
- 
-    
-
-
-   
-    
     static void Register()
     {
         Console.WriteLine("===Register===");
@@ -143,7 +77,7 @@ class Program
         }
 
         users.Add(new User(username, password,email,role));
-        courses.Add(new course(Title));
+        courses.Add(new course(CourseId,Title,Description,InstructorName,MaxStudents,CurrentEnrollments,Category));
     }
     static void validateusername(string username)
     {
@@ -210,7 +144,45 @@ class Program
                     Console.WriteLine("not valid"); break;
             }
         }
-        static void showstudentdashboard()
+         static void LoadSampleCourses()
+         { 
+               courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
+            courses.Add(new Course(2, "Introduction to SQL Server", "Learn SQL Server basics", "Prof.Johnson", 25, 0, "Database"));
+            courses.Add(new Course(3, "Web Development with ASP.NET Core", "Build web applications using ASP.NET Core", "Prof.Williams", 20, 0, "Web Development"));
+            courses.Add(new Course(4, "Advanced C# Techniques", "Explore advanced C# programming concepts", "Prof.Brown", 15, 0, "Programming"));
+            courses.Add(new Course(5, "Database Design and Management", "Learn database design principles", "Prof.Jones", 30, 0, "Database"));
+         }
+        
+        static void BrowseAndEnrollCourses()
+        {
+                LoadSampleCourses();
+                Console.WriteLine("=============");
+                Console.WriteLine("Available courses");
+                Console.WriteLine("=============");
+                foreach (var course in courses)
+                {
+                    Console.WriteLine("===========================");
+                    Console.WriteLine(course.CourseId + ".");
+                    Console.WriteLine(course.Title + " ");
+                    Console.WriteLine("**"+course.Description );
+                    Console.WriteLine("Instructor:" + course.InstructorName);
+                    Console.WriteLine("number of students enrolled:" + course.MaxStudents);
+                    Console.WriteLine("==============================");
+                }
+                Console.WriteLine("Enter the number of courses you wanted to enroll in:");
+                int courseId=Convert.ToInt32(Console.ReadLine());
+                if (courseId > 5)
+                {
+                    Console.WriteLine("incorrect course number.Please enter valid course number from the list");
+                }
+                Course obj =courses.Find(c=>c.CourseId == courseId);
+                bool c1 = obj.CanEnroll();
+                if (users.Exists)
+
+
+
+
+                static void showstudentdashboard()
         {
             Console.WriteLine("================================");
             Console.WriteLine("Welcome to the Student Dashboard");
@@ -226,7 +198,7 @@ class Program
                 switch (studentChoice)
                 {
                     case "1":
-                        Printcourses();
+                      
                         break;
                     case "2":
                         Console.WriteLine("My Course feature coming soon");
@@ -315,6 +287,7 @@ class Program
                 }
             }
         }
+
         bool isLoggedIn = false;
 
         static void logout()
