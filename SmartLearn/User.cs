@@ -38,6 +38,10 @@ namespace SmartLearn
         public DateTime DateRegistered { get; set; }
 
         string newPassword { get; set; }
+        public bool ValidatePassword(string password)
+        {
+            return Password == password;
+        }
         public void ChangePassword(string newPassword)
         {
             Password = newPassword;
