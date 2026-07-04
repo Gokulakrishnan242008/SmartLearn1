@@ -12,6 +12,7 @@ class Program
     static List<Enrollment> enrollments = new List<Enrollment>();
     static bool isLoggedIn = false;
     static User currentUser = null;
+    
     static void Main(string[] args)
     {
         courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
@@ -24,13 +25,13 @@ class Program
         while (running)
             running = ShowMainMenu();
     }
+   
     static bool ShowMainMenu()
     {
         Console.Clear();
         Console.WriteLine("====================================");
         Console.WriteLine("Welcome to SmartLearn LMS");
         Console.WriteLine("====================================");
-        return true;
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
         Console.WriteLine("3.Browse Courses");
@@ -46,6 +47,7 @@ class Program
                 case "3": BrowseAndEnrollCourses();break;
                 default:Console.WriteLine("Invalid choice");break;
             }
+            return true;
         }
     static void Register()
     {
@@ -197,7 +199,7 @@ class Program
                 {
                     int enrollmentid = enrollments.Count + 1;
                     obj.IncrementEnrollment();
-                    Enrollment enrollment = new Enrollment(enrollmentid,"StudentUsername" ,courseId,"courseTitle",enrollmentDate,ProgramPercentage,true);
+                    Enrollment enrollment = new Enrollment(enrollmentid,"StudentUsername","courseTitle",courseId,false);
                     enrollments.Add(enrollment);
                     Console.WriteLine("You have successfully enrolled in the course: " + obj.Title);
                 }

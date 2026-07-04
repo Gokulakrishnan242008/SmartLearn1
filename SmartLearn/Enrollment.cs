@@ -13,14 +13,14 @@ namespace SmartLearn
         public DateTime EnrollmentDate { get; set; }
         public int ProgressPercentage { get; set; }
         public bool IsCompleted {  get; set; }
-        public Enrollment (int enrollmentId,string studentUsername,string courseTitle,int courseId,DateTime enrollmentdate,int progressPercentage,bool isCompleted )
+        public Enrollment (int enrollmentId,string studentUsername,string courseTitle,int courseId,bool isCompleted )
         { 
             EnrollmentId = enrollmentId;
             StudentUsername = studentUsername;
             CourseId = courseId;
             CourseTitle = courseTitle;
-            EnrollmentDate = enrollmentdate;
-            ProgressPercentage = progressPercentage;
+            EnrollmentDate = DateTime.Now;
+            ProgressPercentage = 0;
             IsCompleted = isCompleted;
            
         }
