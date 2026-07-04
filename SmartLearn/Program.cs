@@ -99,6 +99,8 @@ class Program
     {
             Console.Write("Enter username:");
             string username = Console.ReadLine();
+            Console.Write("Enter password:");
+            string password = Console.ReadLine();
             if(string.IsNullOrEmpty(username))
             {
                 Console.WriteLine("Username cannot be empty.");
@@ -109,31 +111,30 @@ class Program
                 Console.WriteLine("Username does not exist. Please register first.");
                 return;
             }
-            Console.Write("Enter password:");
-            string password = Console.ReadLine();
+            
             if(password == null)
             {
                 Console.WriteLine("Password cannot be empty.");
                 return;
             }
-            User checkpass = users.Find(u => u.Username == username);
-            if (checkpass == null)
-            {
-                Console.WriteLine("Username does not exist. Please register first.");
-                return;
-            }
+            //User checkpass = users.Find(u => u.Username == username);
+            //if (checkpass == null)
+            //{
+            //    Console.WriteLine("Username does not exist. Please register first.");
+            //    return;
+            //}
 
-            bool get = checkpass.ValidatePassword(password);
-            if (get)
-            {
-                bool isLoggedIn = true;
-                currentUser = checkpass;
-                Console.WriteLine("Welcome, " + currentUser.Username + "! You have successfully logged in as a " + currentUser.Role + ".");
-            }
-            else
-            {
-                Console.WriteLine("Incorrect password. Please try again.");
-            }
+            //bool get = checkpass.ValidatePassword(password);
+            //if (get)
+            //{
+            //    bool isLoggedIn = true;
+            //    currentUser = checkpass;
+            //    Console.WriteLine("Welcome, " + currentUser.Username + "! You have successfully logged in as a " + currentUser.Role + ".");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Incorrect password. Please try again.");
+            //}
 
                 Console.Write("Enter role");
             string role = Console.ReadLine();
