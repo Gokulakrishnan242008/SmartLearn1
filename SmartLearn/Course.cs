@@ -19,7 +19,7 @@ namespace SmartLearn
 
         public Course(int courseId,string title, string description, string instructorName, int maxStudents,int currentEnrollments,string category)
         {
-            courseId = CourseId;
+            CourseId = courseId;
             Title = title;
             Description = description;
             InstructorName = instructorName;
