@@ -71,7 +71,7 @@ public class Instructor : User
         Console.WriteLine("Created Courses:");
         foreach (var courseId in CreatedCourseIds)
         {
-            Console.WriteLine($"Course ID: {courseId}");
+            Console.WriteLine($"Course ID: {courseId});
         }
     }
 }
