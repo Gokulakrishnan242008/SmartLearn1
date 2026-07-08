@@ -7,7 +7,7 @@ public class Student : User
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
-    public Student(string username, string password, string email, string role) : base(username, password, email, role)
+    public Student(string username, string password, string email) : base(username, password, email)
     {
         EnrolledCourseIds = new List<int>();
         CourseProgress = new Dictionary<int, int>();

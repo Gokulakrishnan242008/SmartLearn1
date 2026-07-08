@@ -7,7 +7,7 @@ public class Admin : User
 {
     bool CanManageUsers;
     bool CanManageCourses;
-    public Admin(string username, string password, string email) : base(username, password, email, "Admin")
+    public Admin(string username, string password, string email) : base(username, password, email)
     {
         CanManageUsers = true;
         CanManageCourses = true;

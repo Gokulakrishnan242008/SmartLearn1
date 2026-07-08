@@ -12,14 +12,14 @@ namespace SmartLearn
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
+        //public string Role { get; set; }
 
-        public User(string username, string password, string email, string role)
+        public User(string username, string password, string email) /*string role*/
         {
             Username = username;
             Password = password;
             Email = email;
-            Role = role;
+            //Role = role;
             IsActive = true;
             DateRegistered = DateTime.Now;
         }
@@ -29,7 +29,7 @@ namespace SmartLearn
             Console.WriteLine($"Username: {Username}");
             Console.WriteLine($"Password:{Password}");
             Console.WriteLine($"Email: {Email}");
-            Console.WriteLine($"Role: {Role}");
+       /*     Console.WriteLine($"Role: {Role}")*/;
             Console.WriteLine($"IsActive:{IsActive}");
             Console.WriteLine($"DateRegistered:{DateRegistered}");
         }

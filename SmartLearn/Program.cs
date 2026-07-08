@@ -90,8 +90,17 @@ class Program
             return;
         }
 
-     
-        
+            if (role.Equals("Student", StringComparison.OrdinalIgnoreCase))
+            {
+                Student student = new Student(username, password, email);
+            }
+            else if(role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
+            {
+                Instructor instructor= new Instructor(username, password, email,calls);
+            }
+
+
+
     }
     
     
@@ -145,12 +154,15 @@ class Program
                 switch (role)
                 {
                     case "student":
+                        Student student = new Student(username, password, email );
                         showstudentdashboard();
                         break;
                     case "Instructor":
+                        Instructor instructor = new Instructor(username, password, email,calls);
                         showinstructordashboard();
                         break;
                     case "Admin":
+                        Admin admin = new Admin(username, password, email);
                         showadmindashboard();
                         break;
                     default:
@@ -159,12 +171,14 @@ class Program
             }
     }
             static void LoadSampleCourses()
-         { 
-               courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
+         {
+            courses.Clear();
+            courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
             courses.Add(new Course(2, "Introduction to SQL Server", "Learn SQL Server basics", "Prof.Johnson", 25,0 , "Database"));
             courses.Add(new Course(3, "Web Development with ASP.NET Core", "Build web applications using ASP.NET Core", "Prof.Williams", 20, 0, "Web Development"));
             courses.Add(new Course(4, "Advanced C# Techniques", "Explore advanced C# programming concepts", "Prof.Brown", 15, 0, "Programming"));
             courses.Add(new Course(5, "Database Design and Management", "Learn database design principles", "Prof.Jones", 30, 0, "Database"));
+            Console.WriteLine("✓ Sample courses loaded successfully!");
          }
         
         static void BrowseAndEnrollCourses()
@@ -201,7 +215,7 @@ class Program
                 {
                     int enrollmentid = enrollments.Count + 1;
                     obj.IncrementEnrollment();
-                    Enrollment enrollment = new Enrollment(enrollmentid,"StudentUsername","courseTitle",courseId,false);
+                    Enrollment enrollment = new Enrollment(enrollmentid, "StudentUsername", "courseTitle", courseId, false);
                     enrollments.Add(enrollment);
                     Console.WriteLine("You have successfully enrolled in the course: " + obj.Title);
                 }
@@ -210,11 +224,210 @@ class Program
             {
                 Console.WriteLine("You must be logged in as a student to enroll in courses. Please log in or register as a student to continue.");
             }
+            static void EnrollStudentInCourse(Student student)
+            {
+                Console.WriteLine("\n=== AVAILABLE COURSES ===");
+                // Display all courses 
+                foreach (Course course in courses)
+                {
+                    Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
+                    Console.WriteLine($"Category: {course.Category}");
+                    Console.WriteLine($"Instructor: {course.InstructorName}");
+                    Console.WriteLine($"Enrollment:{course.CurrentEnrollments}");
+                    Console.WriteLine($"Available: {(course.CanEnroll() ? "✓Yes" : "✗ Full")}");
+                    Console.WriteLine("---");
+                }
 
+                Console.Write("\nEnter Course ID to enroll: ");
+                if (!int.TryParse(Console.ReadLine(), out int courseId))
+                {
+                    Console.WriteLine("  Invalid course ID.");
+                    return;
+                }
 
+                // Find the course 
+                Course selectedCourse = courses.Find(c => c.CourseId == courseId);
 
+                if (selectedCourse == null)
+                {
+                    Console.WriteLine("  Course not found.");
+                    return;
+                }
+                // Check if course can accept enrollments 
+                if (!selectedCourse.CanEnroll())
+                {
+                    Console.WriteLine("  Course is full!");
+                }
+                return;
+            }
+
+            // Check if student already enrolled 
+            if (student.EnrolledCourseIds.Contains(courseId))
+            {
+                Console.WriteLine("  Already enrolled in this course!");
+                return;
+            }
+
+            // Enroll student 
+            student.EnrollInCourse(courseId);
+
+            // Update course enrollment count 
+            selectedCourse.IncrementEnrollment();
+
+            // Create enrollment record 
+            int enrollmentId = enrollments.Count + 1;
+            Enrollment newEnrollment = new Enrollment(enrollmentId, "StudentUsername", "courseTitle",courseId, false);
+
+            enrollments.Add(newEnrollment);
+
+            Console.WriteLine($"✓ Successfully enrolled in '{selectedCourse.Title}'!");
         }
-        static void showstudentdashboard()
+        static void UpdateStudentProgress(Student student)
+        {
+            student.ShowEnrolledCourses();
+
+            Console.Write("\nEnter Course ID to update: ");
+            if (!int.TryParse(Console.ReadLine(), out int courseId))
+            {
+                Console.WriteLine("  Invalid course ID.");
+                return;
+            }
+
+            Console.Write("Enter progress percentage (0-100): ");
+            if (!int.TryParse(Console.ReadLine(), out int progress) ||
+        progress < 0 || progress > 100)
+            {
+                Console.WriteLine("  Invalid progress value.");
+                return;
+            }
+
+            // Update student's progress
+            student.UpdateProgress(courseId, progress);
+
+            // Find and update enrollment record 
+            Enrollment enrollment = enrollments.Find(e =>
+                e.StudentUsername == student.Username && e.CourseId ==courseId);
+
+            if (enrollment != null)
+            {
+                enrollment.UpdateProgress(progress);
+                Console.WriteLine("✓ Progress updated!");
+            }
+        }
+
+        static void DropStudentCourse(Student student)
+        {
+            student.ShowEnrolledCourses();
+
+            Console.Write("\nEnter Course ID to drop: ");
+            if (!int.TryParse(Console.ReadLine(), out int courseId))
+            {
+                Console.WriteLine("  Invalid course ID.");
+                return;
+            }
+
+            // Drop from student 
+            student.DropCourse(courseId);
+
+            // Find the course and decrement enrollment 
+            Course course = courses.Find(c => c.CourseId == courseId);
+            if (course != null)
+            {
+                course.DecrementEnrollment();
+            }
+             // Remove enrollment record 
+            Enrollment enrollment = enrollments.Find(e =>e.StudentUsername == student.Username && e.CourseId == courseId);
+
+            if (enrollment != null)
+            {
+                enrollments.Remove(enrollment);
+            }
+        }
+
+        static void ShowStudentStats(Student student)
+        {
+            Console.WriteLine("\n=== YOUR STATISTICS ===");
+            Console.WriteLine($"Username: {student.Username}");
+            Console.WriteLine($"Total Courses Enrolled:{ student.EnrolledCourseIds.Count}"); 
+            Console.WriteLine($"Completed Courses: { student.GetCompletedCourses().Count}"); 
+             Console.WriteLine($"Average Progress: { student.GetAverageProgress():F2}%"); 
+             var completed = student.GetCompletedCourses(); 
+            if (completed.Count > 0) 
+             { 
+                 Console.WriteLine("\nCompleted Courses:"); 
+                   foreach (int courseId in completed) 
+                    { 
+                        Course course = courses.Find(c => c.CourseId == courseId); 
+                         if (course != null) 
+                          { 
+                             Console.WriteLine($"  ✓ {course.Title}");
+                         }
+                    }
+             }
+        }
+
+        static void AddInstructorCourse(Instructor instructor)
+        {
+            LoadSampleCourses();
+
+            Console.Write("\nEnter Course ID to add: ");
+            if (!int.TryParse(Console.ReadLine(), out int courseId))
+            {
+                Console.WriteLine("  Invalid course ID.");
+                return;
+            }
+
+            Course course = courses.Find(c => c.CourseId == courseId);
+            if (course == null)
+            {
+                Console.WriteLine("  Course not found.");
+                return;
+            }
+
+            instructor.AddCourse(courseId);
+        }
+        static void ShowInstructorStudentCount(Instructor instructor)
+        {
+            int count = instructor.GetStudentCount(enrollments);
+            Console.WriteLine($"\nTotal students in your courses: {count}");
+        }
+
+        static void DisplayAllCourses()
+        {
+            Console.WriteLine("\n=== ALL COURSES ===");
+            foreach (Course course in courses)
+            {
+                Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
+                Console.WriteLine($"Category: {course.Category}");
+                Console.WriteLine("---");
+            }
+        }
+
+        static void DeactivateUserAsAdmin(Admin admin)
+        {
+            admin.ViewAllUsers(users);
+            Console.Write("\nEnter username to deactivate: ");
+            string username = Console.ReadLine();
+
+            User userToDeactivate = users.Find(u => u.Username == username);
+
+            if (userToDeactivate == null)
+            {
+                Console.WriteLine("  User not found.");
+                return;
+            }
+
+            if (userToDeactivate == currentUser)
+            {
+                Console.WriteLine("  You cannot deactivate yourself!");
+                return;
+            }
+
+            admin.DeactivateUser(userToDeactivate);
+        }
+        
+
+            static void showstudentdashboard()
         {
             Console.WriteLine("================================");
             Console.WriteLine("Welcome to the Student Dashboard");
