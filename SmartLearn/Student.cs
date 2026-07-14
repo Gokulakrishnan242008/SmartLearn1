@@ -12,7 +12,7 @@ public class Student : User
         EnrolledCourseIds = new List<int>();
         CourseProgress = new Dictionary<int, int>();
     }
-    public List<int>GetCompletedCourses()
+    public List<int> GetCompletedCourses()
     {
         List<int> completedCourses = new List<int>();
         foreach (var courseId in EnrolledCourseIds)
@@ -79,5 +79,8 @@ public class Student : User
             int progress = CourseProgress[courseId];
             Console.WriteLine($"Course {courseId} → {progress}% completed");
         }
+    }
+    public void UpdateProgress(int courseId,int progress)
+    {
     }
 }

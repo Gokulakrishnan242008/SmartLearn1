@@ -10,9 +10,9 @@ class Program
     static List<User> users = new List<User>();
     static List<Course> courses = new List<Course>();
     static List<Enrollment> enrollments = new List<Enrollment>();
-     bool isLoggedIn = false;
+    bool isLoggedIn = false;
     static User currentUser = null;
-    
+
     static void Main(string[] args)
     {
         courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
@@ -25,7 +25,7 @@ class Program
         while (running)
             running = ShowMainMenu();
     }
-   
+
     static bool ShowMainMenu()
     {
         Console.Clear();
@@ -42,38 +42,38 @@ class Program
 
             switch (userInput)
             {
-                case "1": Login();break;
-                case "2":Register();break;
-                case "3": BrowseAndEnrollCourses();break;
-                default:Console.WriteLine("Invalid choice");break;
+                case "1": Login(); break;
+                case "2": Register(); break;
+                case "3": BrowseAndEnrollCourses(); break;
+                default: Console.WriteLine("Invalid choice"); break;
             }
             return true;
         }
-    static void Register()
-    {
-        Console.WriteLine("===Register===");
-        Console.Write("Enter username:");
-        string username = Console.ReadLine();
-        if (username != null)
+        static void Register()
         {
-           if(users.Exists(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
+            Console.WriteLine("===Register===");
+            Console.Write("Enter username:");
+            string username = Console.ReadLine();
+            if (username != null)
+            {
+                if (users.Exists(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
                 {
                     Console.WriteLine("Username already exists. Please choose a different username.");
                     return;
                 }
-        }
-        Console.Write("Enter password:");
-        string password = Console.ReadLine();
-        if (password!=null )
-        {
-            if(password.Length < 6)
+            }
+            Console.Write("Enter password:");
+            string password = Console.ReadLine();
+            if (password != null)
+            {
+                if (password.Length < 6)
                 {
                     Console.WriteLine("Password must be at least 6 characters long.");
                     return;
                 }
-        }
-        Console.Write("Enter email:");
-        string email = Console.ReadLine();
+            }
+            Console.Write("Enter email:");
+            string email = Console.ReadLine();
             if (email != null)
             {
                 if (users.Exists(u => u.Email == email))
@@ -82,30 +82,30 @@ class Program
                     return;
                 }
             }
-        Console.Write("Enter role:(student/Instructor/Admin):");
-        string role = Console.ReadLine();
-        if (role != "student" && role != "Instructor" && role != "Admin")
-        {
-            Console.WriteLine("Invaild role.please choose from student,Instructoror admin");
-            return;
-        }
+            Console.Write("Enter role:(student/Instructor/Admin):");
+            string role = Console.ReadLine();
+            if (role != "student" && role != "Instructor" && role != "Admin")
+            {
+                Console.WriteLine("Invaild role.please choose from student,Instructoror admin");
+                return;
+            }
 
             if (role.Equals("Student", StringComparison.OrdinalIgnoreCase))
             {
                 Student student = new Student(username, password, email);
             }
-            else if(role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
+            else if (role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
             {
-                Instructor instructor= new Instructor(username, password, email,calls);
+                Instructor instructor = new Instructor(username, password, email, calls);
             }
 
 
 
-    }
-    
-    
-    static void Login()
-    {
+        }
+
+
+        static void Login()
+        {
             Console.Write("Enter username:");
             string username = Console.ReadLine();
             Console.Write("Enter password:");
@@ -120,7 +120,7 @@ class Program
             //    Console.WriteLine("Username does not exist. Please register first.");
             //    return;
             //}
-            
+
             //if(password == null)
             //{
             //    Console.WriteLine("Password cannot be empty.");
@@ -145,16 +145,16 @@ class Program
             //    Console.WriteLine("Incorrect password. Please try again.");
             //}
 
-                Console.Write("Enter role:");
+            Console.Write("Enter role:");
             string role = Console.ReadLine();
             //Console.Write("Enter session state : (isloggedin/currentUser/currentROLE)");
             //string sessionState = Console.ReadLine();
-           bool isLoggedIn =true;
+            bool isLoggedIn = true;
             {
                 switch (role)
                 {
                     case "student":
-                        Student student = new Student(username, password, email );
+                        Student student = new Student(username, password, email);
                         showstudentdashboard();
                         break;
                     case "Instructor":
@@ -169,18 +169,18 @@ class Program
                         Console.WriteLine("not valid"); break;
                 }
             }
-    }
-            static void LoadSampleCourses()
-         {
+        }
+        static void LoadSampleCourses()
+        {
             courses.Clear();
             courses.Add(new Course(1, "C# Programming Fundamentals", "Learn the basics of C#", "Prof.Smith", 30, 0, "Programming"));
-            courses.Add(new Course(2, "Introduction to SQL Server", "Learn SQL Server basics", "Prof.Johnson", 25,0 , "Database"));
+            courses.Add(new Course(2, "Introduction to SQL Server", "Learn SQL Server basics", "Prof.Johnson", 25, 0, "Database"));
             courses.Add(new Course(3, "Web Development with ASP.NET Core", "Build web applications using ASP.NET Core", "Prof.Williams", 20, 0, "Web Development"));
             courses.Add(new Course(4, "Advanced C# Techniques", "Explore advanced C# programming concepts", "Prof.Brown", 15, 0, "Programming"));
             courses.Add(new Course(5, "Database Design and Management", "Learn database design principles", "Prof.Jones", 30, 0, "Database"));
             Console.WriteLine("✓ Sample courses loaded successfully!");
-         }
-        
+        }
+
         static void BrowseAndEnrollCourses()
         {
             LoadSampleCourses();
@@ -224,6 +224,7 @@ class Program
             {
                 Console.WriteLine("You must be logged in as a student to enroll in courses. Please log in or register as a student to continue.");
             }
+        }
             static void EnrollStudentInCourse(Student student)
             {
                 Console.WriteLine("\n=== AVAILABLE COURSES ===");
@@ -233,6 +234,7 @@ class Program
                     Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
                     Console.WriteLine($"Category: {course.Category}");
                     Console.WriteLine($"Instructor: {course.InstructorName}");
+                    Console.WriteLine($"Days Since Enrollment:{DateTime.Now}");
                     Console.WriteLine($"Enrollment:{course.CurrentEnrollments}");
                     Console.WriteLine($"Available: {(course.CanEnroll() ? "✓Yes" : "✗ Full")}");
                     Console.WriteLine("---");
@@ -259,291 +261,290 @@ class Program
                     Console.WriteLine("  Course is full!");
                 }
                 return;
-            }
 
-            // Check if student already enrolled 
-            if (student.EnrolledCourseIds.Contains(courseId))
+
+                // Check if student already enrolled 
+                if (student.EnrolledCourseIds.Contains(courseId))
+                {
+                    Console.WriteLine("  Already enrolled in this course!");
+                    return;
+                }
+
+                // Enroll student 
+                student.EnrollInCourse(courseId);
+
+                // Update course enrollment count 
+                selectedCourse.IncrementEnrollment();
+
+                // Create enrollment record 
+                int enrollmentId = enrollments.Count + 1;
+                Enrollment newEnrollment = new Enrollment(enrollmentId, "StudentUsername", "courseTitle", courseId, false);
+
+                enrollments.Add(newEnrollment);
+
+                Console.WriteLine($"✓ Successfully enrolled in '{selectedCourse.Title}'!");
+            }
+            static void UpdateStudentProgress(Student student)
             {
-                Console.WriteLine("  Already enrolled in this course!");
-                return;
+                student.ShowEnrolledCourses();
+
+                Console.Write("\nEnter Course ID to update: ");
+                if (!int.TryParse(Console.ReadLine(), out int courseId))
+                {
+                    Console.WriteLine("  Invalid course ID.");
+                    return;
+                }
+
+                Console.Write("Enter progress percentage (0-100): ");
+                if (!int.TryParse(Console.ReadLine(), out int progress) || progress < 0 || progress > 100)
+                {
+                    Console.WriteLine("  Invalid progress value.");
+                    return;
+                }
+
+                // Update student's progress
+                student.UpdateProgress(courseId, progress);
+
+                // Find and update enrollment record 
+                Enrollment enrollment = enrollments.Find(e => e.StudentUsername == student.Username && e.CourseId == courseId);
+
+                if (enrollment != null)
+                {
+                    enrollment.UpdateProgress(progress);
+                    Console.WriteLine("✓ Progress updated!");
+                }
             }
 
-            // Enroll student 
-            student.EnrollInCourse(courseId);
-
-            // Update course enrollment count 
-            selectedCourse.IncrementEnrollment();
-
-            // Create enrollment record 
-            int enrollmentId = enrollments.Count + 1;
-            Enrollment newEnrollment = new Enrollment(enrollmentId, "StudentUsername", "courseTitle",courseId, false);
-
-            enrollments.Add(newEnrollment);
-
-            Console.WriteLine($"✓ Successfully enrolled in '{selectedCourse.Title}'!");
-        }
-        static void UpdateStudentProgress(Student student)
-        {
-            student.ShowEnrolledCourses();
-
-            Console.Write("\nEnter Course ID to update: ");
-            if (!int.TryParse(Console.ReadLine(), out int courseId))
+            static void DropStudentCourse(Student student)
             {
-                Console.WriteLine("  Invalid course ID.");
-                return;
+                student.ShowEnrolledCourses();
+
+                Console.Write("\nEnter Course ID to drop: ");
+                if (!int.TryParse(Console.ReadLine(), out int courseId))
+                {
+                    Console.WriteLine("  Invalid course ID.");
+                    return;
+                }
+
+                // Drop from student 
+                student.DropCourse(courseId);
+
+                // Find the course and decrement enrollment 
+                Course course = courses.Find(c => c.CourseId == courseId);
+                if (course != null)
+                {
+                    course.DecrementEnrollment();
+                }
+                // Remove enrollment record 
+                Enrollment enrollment = enrollments.Find(e => e.StudentUsername == student.Username && e.CourseId == courseId);
+
+                if (enrollment != null)
+                {
+                    enrollments.Remove(enrollment);
+                }
             }
 
-            Console.Write("Enter progress percentage (0-100): ");
-            if (!int.TryParse(Console.ReadLine(), out int progress) ||
-        progress < 0 || progress > 100)
+            static void ShowStudentStats(Student student)
             {
-                Console.WriteLine("  Invalid progress value.");
-                return;
-            }
-
-            // Update student's progress
-            student.UpdateProgress(courseId, progress);
-
-            // Find and update enrollment record 
-            Enrollment enrollment = enrollments.Find(e =>
-                e.StudentUsername == student.Username && e.CourseId ==courseId);
-
-            if (enrollment != null)
-            {
-                enrollment.UpdateProgress(progress);
-                Console.WriteLine("✓ Progress updated!");
-            }
-        }
-
-        static void DropStudentCourse(Student student)
-        {
-            student.ShowEnrolledCourses();
-
-            Console.Write("\nEnter Course ID to drop: ");
-            if (!int.TryParse(Console.ReadLine(), out int courseId))
-            {
-                Console.WriteLine("  Invalid course ID.");
-                return;
-            }
-
-            // Drop from student 
-            student.DropCourse(courseId);
-
-            // Find the course and decrement enrollment 
-            Course course = courses.Find(c => c.CourseId == courseId);
-            if (course != null)
-            {
-                course.DecrementEnrollment();
-            }
-             // Remove enrollment record 
-            Enrollment enrollment = enrollments.Find(e =>e.StudentUsername == student.Username && e.CourseId == courseId);
-
-            if (enrollment != null)
-            {
-                enrollments.Remove(enrollment);
-            }
-        }
-
-        static void ShowStudentStats(Student student)
-        {
-            Console.WriteLine("\n=== YOUR STATISTICS ===");
-            Console.WriteLine($"Username: {student.Username}");
-            Console.WriteLine($"Total Courses Enrolled:{ student.EnrolledCourseIds.Count}"); 
-            Console.WriteLine($"Completed Courses: { student.GetCompletedCourses().Count}"); 
-             Console.WriteLine($"Average Progress: { student.GetAverageProgress():F2}%"); 
-             var completed = student.GetCompletedCourses(); 
-            if (completed.Count > 0) 
-             { 
-                 Console.WriteLine("\nCompleted Courses:"); 
-                   foreach (int courseId in completed) 
-                    { 
-                        Course course = courses.Find(c => c.CourseId == courseId); 
-                         if (course != null) 
-                          { 
-                             Console.WriteLine($"  ✓ {course.Title}");
-                         }
+                Console.WriteLine("\n=== YOUR STATISTICS ===");
+                Console.WriteLine($"Username: {student.Username}");
+                Console.WriteLine($"Total Courses Enrolled:{student.EnrolledCourseIds.Count}");
+                Console.WriteLine($"Completed Courses: {student.GetCompletedCourses().Count}");
+                Console.WriteLine($"Average Progress: {student.GetAverageProgress():F2}%");
+                var completed = student.GetCompletedCourses();
+                if (completed.Count > 0)
+                {
+                    Console.WriteLine("\nCompleted Courses:");
+                    foreach (int courseId in completed)
+                    {
+                        Course course = courses.Find(c => c.CourseId == courseId);
+                        if (course != null)
+                        {
+                            Console.WriteLine($"  ✓ {course.Title}");
+                        }
                     }
-             }
-        }
-
-        static void AddInstructorCourse(Instructor instructor)
-        {
-            LoadSampleCourses();
-
-            Console.Write("\nEnter Course ID to add: ");
-            if (!int.TryParse(Console.ReadLine(), out int courseId))
-            {
-                Console.WriteLine("  Invalid course ID.");
-                return;
+                }
             }
 
-            Course course = courses.Find(c => c.CourseId == courseId);
-            if (course == null)
+            static void AddInstructorCourse(Instructor instructor)
             {
-                Console.WriteLine("  Course not found.");
-                return;
+                LoadSampleCourses();
+
+                Console.Write("\nEnter Course ID to add: ");
+                if (!int.TryParse(Console.ReadLine(), out int courseId))
+                {
+                    Console.WriteLine("  Invalid course ID.");
+                    return;
+                }
+
+                Course course = courses.Find(c => c.CourseId == courseId);
+                if (course == null)
+                {
+                    Console.WriteLine("  Course not found.");
+                    return;
+                }
+
+                instructor.AddCourse(courseId);
+            }
+            static void ShowInstructorStudentCount(Instructor instructor)
+            {
+                int count = instructor.GetStudentCount(enrollments);
+                Console.WriteLine($"\nTotal students in your courses: {count}");
             }
 
-            instructor.AddCourse(courseId);
-        }
-        static void ShowInstructorStudentCount(Instructor instructor)
-        {
-            int count = instructor.GetStudentCount(enrollments);
-            Console.WriteLine($"\nTotal students in your courses: {count}");
-        }
-
-        static void DisplayAllCourses()
-        {
-            Console.WriteLine("\n=== ALL COURSES ===");
-            foreach (Course course in courses)
+            static void DisplayAllCourses()
             {
-                Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
-                Console.WriteLine($"Category: {course.Category}");
-                Console.WriteLine("---");
-            }
-        }
-
-        static void DeactivateUserAsAdmin(Admin admin)
-        {
-            admin.ViewAllUsers(users);
-            Console.Write("\nEnter username to deactivate: ");
-            string username = Console.ReadLine();
-
-            User userToDeactivate = users.Find(u => u.Username == username);
-
-            if (userToDeactivate == null)
-            {
-                Console.WriteLine("  User not found.");
-                return;
+                Console.WriteLine("\n=== ALL COURSES ===");
+                foreach (Course course in courses)
+                {
+                    Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
+                    Console.WriteLine($"Category: {course.Category}");
+                    Console.WriteLine("---");
+                }
             }
 
-            if (userToDeactivate == currentUser)
+            static void DeactivateUserAsAdmin(Admin admin)
             {
-                Console.WriteLine("  You cannot deactivate yourself!");
-                return;
+                admin.ViewAllUsers(users);
+                Console.Write("\nEnter username to deactivate: ");
+                string username = Console.ReadLine();
+
+                User userToDeactivate = users.Find(u => u.Username == username);
+
+                if (userToDeactivate == null)
+                {
+                    Console.WriteLine("  User not found.");
+                    return;
+                }
+
+                if (userToDeactivate == currentUser)
+                {
+                    Console.WriteLine("  You cannot deactivate yourself!");
+                    return;
+                }
+
+                admin.DeactivateUser(userToDeactivate);
             }
 
-            admin.DeactivateUser(userToDeactivate);
-        }
-        
 
             static void showstudentdashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Student Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.BrowseCourse");
-            Console.WriteLine("2.My Course");
-            Console.WriteLine("3.Progress");
-            Console.WriteLine("4.Take Quiz ");
-            Console.WriteLine("5.Logout");
-            Console.Write("Enter your choice:");
-            string studentChoice = Console.ReadLine();
             {
-                switch (studentChoice)
+                Console.WriteLine("================================");
+                Console.WriteLine("Welcome to the Student Dashboard");
+                Console.WriteLine("================================");
+                Console.WriteLine("1.BrowseCourse");
+                Console.WriteLine("2.My Course");
+                Console.WriteLine("3.Progress");
+                Console.WriteLine("4.Take Quiz ");
+                Console.WriteLine("5.Logout");
+                Console.Write("Enter your choice:");
+                string studentChoice = Console.ReadLine();
                 {
-                    case "1":
-                        BrowseAndEnrollCourses();break;
-                     case "2":
-                        Console.WriteLine("My Course feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("Progress feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Take Quiz feature coming soon");
-                        break;
-                    case "5":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-5");
-                        break;
+                    switch (studentChoice)
+                    {
+                        case "1":
+                            BrowseAndEnrollCourses(); break;
+                        case "2":
+                            Console.WriteLine("My Course feature coming soon");
+                            break;
+                        case "3":
+                            Console.WriteLine("Progress feature coming soon");
+                            break;
+                        case "4":
+                            Console.WriteLine("Take Quiz feature coming soon");
+                            break;
+                        case "5":
+                            Console.WriteLine("Logout feature coming soon");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.Please choose from 1-5");
+                            break;
+                    }
+                }
+
+            }
+            static void showinstructordashboard()
+            {
+                Console.WriteLine("================================");
+                Console.WriteLine("Welcome to the Instructor Dashboard");
+                Console.WriteLine("================================");
+                Console.WriteLine("1.My Course");
+                Console.WriteLine("2.Create Course");
+                Console.WriteLine("3.View Student Progress");
+                Console.WriteLine("4.Grade Assignments");
+                Console.WriteLine("5.Logout");
+                Console.Write("Enter your choice:");
+                string instructorChoice = Console.ReadLine();
+                {
+                    switch (instructorChoice)
+                    {
+                        case "1":
+                            Console.WriteLine("My Course feature coming soon");
+                            break;
+                        case "2":
+                            Console.WriteLine("Create Course feature coming soon");
+                            break;
+                        case "3":
+                            Console.WriteLine("View Student Progress feature coming soon");
+                            break;
+                        case "4":
+                            Console.WriteLine("Grade Assignments feature coming soon");
+                            break;
+                        case "5":
+                            Console.WriteLine("Logout feature coming soon");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.Please choose from 1-5");
+                            break;
+                    }
+                }
+            }
+            static void showadmindashboard()
+            {
+                Console.WriteLine("================================");
+                Console.WriteLine("Welcome to the Admin Dashboard");
+                Console.WriteLine("================================");
+                Console.WriteLine("1.Manage Users");
+                Console.WriteLine("2.Manage Courses");
+                Console.WriteLine("3.View Reports");
+                Console.WriteLine("4.Logout");
+                Console.Write("Enter your choice:");
+                string adminChoice = Console.ReadLine();
+                {
+                    switch (adminChoice)
+                    {
+                        case "1":
+                            Console.WriteLine("Manage Users feature coming soon");
+                            break;
+                        case "2":
+                            Console.WriteLine("Manage Courses feature coming soon");
+                            break;
+                        case "3":
+                            Console.WriteLine("View Reports feature coming soon");
+                            break;
+                        case "4":
+                            Console.WriteLine("Logout feature coming soon");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.Please choose from 1-4");
+                            break;
+                    }
                 }
             }
 
-        }
-        static void showinstructordashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Instructor Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.My Course");
-            Console.WriteLine("2.Create Course");
-            Console.WriteLine("3.View Student Progress");
-            Console.WriteLine("4.Grade Assignments");
-            Console.WriteLine("5.Logout");
-            Console.Write("Enter your choice:");
-            string instructorChoice = Console.ReadLine();
-            {
-                switch (instructorChoice)
-                {
-                    case "1":
-                        Console.WriteLine("My Course feature coming soon");
-                        break;
-                    case "2":
-                        Console.WriteLine("Create Course feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("View Student Progress feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Grade Assignments feature coming soon");
-                        break;
-                    case "5":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-5");
-                        break;
-                }
-            }
-        }
-        static void showadmindashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Admin Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.Manage Users");
-            Console.WriteLine("2.Manage Courses");
-            Console.WriteLine("3.View Reports");
-            Console.WriteLine("4.Logout");
-            Console.Write("Enter your choice:");
-            string adminChoice = Console.ReadLine();
-            {
-                switch (adminChoice)
-                {
-                    case "1":
-                        Console.WriteLine("Manage Users feature coming soon");
-                        break;
-                    case "2":
-                        Console.WriteLine("Manage Courses feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("View Reports feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-4");
-                        break;
-                }
-            }
-        }
+            bool isLoggedIn = false;
 
-        bool isLoggedIn = false;
-
-        static void logout()
-        {
-            Console.WriteLine("isLoggedIn=False");
-            Console.WriteLine("currentUser=''");
-            Console.WriteLine("currentRole=''");
-        }
-        static void exit()
-        {
-            Console.WriteLine("Exiting the application...");
-        }
+            static void logout()
+            {
+                Console.WriteLine("isLoggedIn=False");
+                Console.WriteLine("currentUser=''");
+                Console.WriteLine("currentRole=''");
+            }
+            static void exit()
+            {
+                Console.WriteLine("Exiting the application...");
+            }
+        
     }
 }
 

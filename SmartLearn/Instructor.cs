@@ -1,12 +1,13 @@
 ﻿using SmartLearn;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 public class Instructor : User
 {
     public List<int> CreatedCourseIds { get; set; }
-    public Instructor(string username, string password, string email, int calls) : base(username, password, email, calls)
+    public Instructor(string username, string password, string email, int calls) : base(username, password, email, "calls")
     {
         CreatedCourseIds = new List<int>();
     }
@@ -71,7 +72,8 @@ public class Instructor : User
         Console.WriteLine("Created Courses:");
         foreach (var courseId in CreatedCourseIds)
         {
-            Console.WriteLine($"Course ID: {courseId}");
+            Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
+            
         }
     }
 }
