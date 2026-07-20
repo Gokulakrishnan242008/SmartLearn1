@@ -14,12 +14,12 @@ namespace SmartLearn
         public string Email { get; set; }
         public string Role { get; set; }
 
-        public User(string username, string password, string email, string role)
+        public User(string username, string password, string email)
         {
             Username = username;
             Password = password;
             Email = email;
-            Role = role;
+            //Role = role;
             IsActive = true;
             DateRegistered = DateTime.Now;
         }

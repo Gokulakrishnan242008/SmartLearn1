@@ -7,7 +7,7 @@ using System.Text;
 public class Instructor : User
 {
     public List<int> CreatedCourseIds { get; set; }
-    public Instructor(string username, string password, string email, int calls) : base(username, password, email, "calls")
+    public Instructor(string username, string password, string email) : base(username, password, email) /*"calls"*/
     {
         CreatedCourseIds = new List<int>();
     }
@@ -72,7 +72,7 @@ public class Instructor : User
         Console.WriteLine("Created Courses:");
         foreach (var courseId in CreatedCourseIds)
         {
-            Console.WriteLine($"\n[{course.CourseId}] {course.Title}");
+            Console.WriteLine($"courseId:{courseId}");
             
         }
     }
