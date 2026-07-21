@@ -96,7 +96,7 @@ class Program
             }
             else if (role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
             {
-                Instructor instructor = new Instructor(username, password, email, calls);
+                Instructor instructor = new Instructor(username, password, email);
             }
 
 
@@ -110,6 +110,8 @@ class Program
             string username = Console.ReadLine();
             Console.Write("Enter password:");
             string password = Console.ReadLine();
+            Console.Write("Enter email:");
+            string email = Console.ReadLine();
             //if(string.IsNullOrEmpty(username))
             //{
             //    Console.WriteLine("Username cannot be empty.");
@@ -158,7 +160,7 @@ class Program
                         showstudentdashboard();
                         break;
                     case "Instructor":
-                        Instructor instructor = new Instructor(username, password, email,calls);
+                        Instructor instructor = new Instructor(username, password, email);
                         showinstructordashboard();
                         break;
                     case "Admin":
