@@ -34,7 +34,7 @@ namespace SmartLearn
             Console.WriteLine($"ProgressPercentage:{ProgressPercentage}");
             Console.WriteLine($"IsCompleted:{IsCompleted}");
         }
-     
+        public void UpdateProgress(int courseId,int ProgressPercentage) { }     
     }
 
 

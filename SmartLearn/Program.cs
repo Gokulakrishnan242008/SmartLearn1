@@ -96,7 +96,7 @@ class Program
             }
             else if(role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
             {
-                Instructor instructor= new Instructor(username, password, email,calls);
+                Instructor instructor= new Instructor(username, password, email);
             }
 
 
@@ -110,45 +110,12 @@ class Program
             string username = Console.ReadLine();
             Console.Write("Enter password:");
             string password = Console.ReadLine();
-            //if(string.IsNullOrEmpty(username))
-            //{
-            //    Console.WriteLine("Username cannot be empty.");
-            //    return;
-            //}
-            //if (!users.Exists(u => u.Username == username))
-            //{
-            //    Console.WriteLine("Username does not exist. Please register first.");
-            //    return;
-            //}
-            
-            //if(password == null)
-            //{
-            //    Console.WriteLine("Password cannot be empty.");
-            //    return;
-            //}
-            //User checkpass = users.Find(u => u.Username == username);
-            //if (checkpass == null)
-            //{
-            //    Console.WriteLine("Username does not exist. Please register first.");
-            //    return;
-            //}
-
-            //bool get = checkpass.ValidatePassword(password);
-            //if (get)
-            //{
-            //    bool isLoggedIn = true;
-            //    currentUser = checkpass;
-            //    Console.WriteLine("Welcome, " + currentUser.Username + "! You have successfully logged in as a " + currentUser.Role + ".");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Incorrect password. Please try again.");
-            //}
-
-                Console.Write("Enter role:");
+            Console.Write("Enter email:");
+            string email = Console.ReadLine();
+            Console.Write("Enter role:");
             string role = Console.ReadLine();
-            //Console.Write("Enter session state : (isloggedin/currentUser/currentROLE)");
-            //string sessionState = Console.ReadLine();
+        
+       
            bool isLoggedIn =true;
             {
                 switch (role)
@@ -158,7 +125,7 @@ class Program
                         showstudentdashboard();
                         break;
                     case "Instructor":
-                        Instructor instructor = new Instructor(username, password, email,calls);
+                        Instructor instructor = new Instructor(username, password, email);
                         showinstructordashboard();
                         break;
                     case "Admin":
@@ -205,7 +172,7 @@ class Program
             }
             Course obj = courses.Find(c => c.CourseId == courseId);
             bool c1 = obj.CanEnroll();
-            if (users.Exists(e => e.Username == currentUser.Username && e.Role == "student"))
+            if (users.Exists(e => e.Username == currentUser.Username ))
             {
                 if (c1 == false)
                 {
@@ -294,23 +261,21 @@ class Program
             }
 
             Console.Write("Enter progress percentage (0-100): ");
-            if (!int.TryParse(Console.ReadLine(), out int progress) ||
-        progress < 0 || progress > 100)
+            if (!int.TryParse(Console.ReadLine(), out int ProgressPercentage) ||ProgressPercentage < 0 || ProgressPercentage > 100)
             {
                 Console.WriteLine("  Invalid progress value.");
                 return;
             }
 
             // Update student's progress
-            student.UpdateProgress(courseId, progress);
+            student.UpdateProgress(courseId, ProgressPercentage);
 
             // Find and update enrollment record 
-            Enrollment enrollment = enrollments.Find(e =>
-                e.StudentUsername == student.Username && e.CourseId ==courseId);
+            Enrollment enrollment = enrollments.Find(e =>e.StudentUsername == student.Username && e.CourseId ==courseId);
 
             if (enrollment != null)
             {
-                enrollment.UpdateProgress(progress);
+                enrollment.UpdateProgress(ProgressPercentage);
                 Console.WriteLine("✓ Progress updated!");
             }
         }
