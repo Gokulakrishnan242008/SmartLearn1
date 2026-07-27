@@ -239,6 +239,7 @@ class Program
             student.EnrollInCourse(courseId);
 
             // Update course enrollment count 
+            Course seelectedCourse = courses.Find(c => c.CourseId == courseId);
             selectedCourse.IncrementEnrollment();
 
             // Create enrollment record 

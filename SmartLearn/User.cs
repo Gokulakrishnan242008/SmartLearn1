@@ -7,7 +7,7 @@ namespace SmartLearn
 {
 
 
-    public class User
+    public abstract class User
     {
         public string Username { get; set; }
         public string Password { get; set; }
@@ -24,7 +24,7 @@ namespace SmartLearn
             DateRegistered = DateTime.Now;
         }
 
-        public void DisplayInfo()
+        public virtual void DisplayInfo()
         {
             Console.WriteLine($"Username: {Username}");
             Console.WriteLine($"Password:{Password}");
@@ -54,7 +54,8 @@ namespace SmartLearn
             IsActive = false;
             Console.WriteLine("Account deactivated)");
         }
-
+        public abstract void DisplayDashboard();
+        public abstract string GetUserType();
 
     }
 }

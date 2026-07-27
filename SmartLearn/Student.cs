@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-public class Student : User
+public abstract class  Student : User
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
@@ -79,5 +79,35 @@ public class Student : User
             int progress = CourseProgress[courseId];
             Console.WriteLine($"Course {courseId} → {progress}% completed");
         }
+    }
+    public void UpdateProgress(int courseId, int progressPercentage)
+    {        }
+    public void EnrollInCourses(int courseId)
+    {
+        if (!EnrolledCourseIds.Contains(courseId))
+        {
+            EnrolledCourseIds.Add(courseId);
+            CourseProgress[courseId] = 0; // Initialize progress to 0%
+            Console.WriteLine("✓ Successfully enrolled!");
+        }
+        else
+        {
+            Console.WriteLine("❌ Already enrolled in this course!");
+        }
+    }
+    public override void DisplayDashboard()
+    {
+        Console.Clear();
+        Console.WriteLine("");
+        Console.WriteLine("||      STUDENT DASHBOARD             ||");
+        Console.WriteLine($"||Welcome:{Username}||");
+        Console.WriteLine($"||Enrolled Courses:{Enrollment.Count}||");
+        Console.WriteLine("                                        ");
+        Console.WriteLine("[1] Browse Courses");
+        Console.WriteLine("[2] My Enrolled Courses");
+        Console.WriteLine("[3] Update Progress");
+        Console.WriteLine("[4] My Statistics");
+        Console.WriteLine("[5] Logout");
+
     }
 }
