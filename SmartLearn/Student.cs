@@ -7,10 +7,20 @@ public abstract class  Student : User
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
+ 
     public Student(string username, string password, string email) : base(username, password, email)
     {
         EnrolledCourseIds = new List<int>();
         CourseProgress = new Dictionary<int, int>();
+    }
+    public override string GetUserType()
+    {
+        return "Student";
+    }
+    public override void DisplayInfo()
+    {
+            base.DisplayInfo();
+        Console.WriteLine($"enrolled courses;{enr "
     }
     public List<int>GetCompletedCourses()
     {
@@ -97,11 +107,12 @@ public abstract class  Student : User
     }
     public override void DisplayDashboard()
     {
+        List<Enrollment> enrollments = new List<Enrollment>();
         Console.Clear();
         Console.WriteLine("");
         Console.WriteLine("||      STUDENT DASHBOARD             ||");
-        Console.WriteLine($"||Welcome:{Username}||");
-        Console.WriteLine($"||Enrolled Courses:{Enrollment.Count}||");
+        Console.WriteLine($"Welcome:{Username}");
+        Console.WriteLine($"Enrolled Courses:{enrollments.Count}");
         Console.WriteLine("                                        ");
         Console.WriteLine("[1] Browse Courses");
         Console.WriteLine("[2] My Enrolled Courses");

@@ -3,12 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public class Instructor : User
+public abstract class Instructor : User
 {
+    public string Department {  get; set; }
+    public List<Course> CoursesTeaching { get; set; }= new List<Course>();
     public List<int> CreatedCourseIds { get; set; }
     public Instructor(string username, string password, string email) : base(username, password, email)
     {
         CreatedCourseIds = new List<int>();
+    }
+    public override string GetUserType()
+    {
+        return "Instructor";
+    }
+    public override void DisplayInfo()
+    {
+             base.DisplayInfo();
+        Console.WriteLine($"Department;{Department}");
+        Console.WriteLine($"CoursesTeaching;{CoursesTeaching.Count}");
     }
     public int GetStudentCount(List<Enrollment> enrollments)
     { 
@@ -73,5 +85,20 @@ public class Instructor : User
         {
             Console.WriteLine($"Course ID: {courseId}");
         }
+    }
+    public override void DisplayDashboard()
+    {
+      
+        Console.WriteLine("");
+        Console.WriteLine("          INSTRUCTOR DASHBOARD          ");
+        Console.WriteLine("");
+        Console.WriteLine($"Welcome,Professor: {Username}!");
+        Console.WriteLine("Department name: Computer Science");
+        Console.WriteLine($"Teaching:{CoursesTeaching.Count}courses");
+        Console.WriteLine("My Courses");
+        Console.WriteLine("Create New Course");
+        Console.WriteLine("View Student Roster");
+        Console.WriteLine("Grade Assignments");
+        Console.WriteLine("Logout");
     }
 }

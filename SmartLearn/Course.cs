@@ -16,7 +16,6 @@ namespace SmartLearn
         public int CurrentEnrollments {  get; set; }
         public string Category { get; set; }
 
-
         public Course(int courseId,string title, string description, string instructorName, int maxStudents,int currentEnrollments,string category)
         {
             CourseId = courseId;
