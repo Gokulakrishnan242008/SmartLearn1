@@ -92,7 +92,7 @@ public abstract class Instructor : User
         Console.WriteLine("");
         Console.WriteLine("          INSTRUCTOR DASHBOARD          ");
         Console.WriteLine("");
-        Console.WriteLine($"Welcome,Professor: {Username}!");
+        Console.WriteLine($"Welcome,Professor {Username}!");
         Console.WriteLine("Department name: Computer Science");
         Console.WriteLine($"Teaching:{CoursesTeaching.Count}courses");
         Console.WriteLine("My Courses");

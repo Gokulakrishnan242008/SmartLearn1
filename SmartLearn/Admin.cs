@@ -3,14 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public class Admin : User
+public abstract class Admin : User
 {
     bool CanManageUsers;
     bool CanManageCourses;
+    string AdminLevel;
     public Admin(string username, string password, string email) : base(username, password, email)
     {
         CanManageUsers = true;
         CanManageCourses = true;
+        AdminLevel = "Super";
+    }
+    public override string GetUserType()
+    {
+        return "Admin";
+    }
+    public override void DisplayInfo()
+    {
+            base.DisplayInfo();
     }
     public void ViewAllUsers(List<User> users)
     {
@@ -39,6 +49,20 @@ public class Admin : User
         Console.WriteLine("Admin Permissions:");
         Console.WriteLine($"Can Manage Users: {CanManageUsers}");
         Console.WriteLine($"Can Manage Courses: {CanManageCourses}");
+    }
+    public override void DisplayDashboard()
+    {
+        Console.WriteLine("");
+        Console.WriteLine("       ADMIN DASHBOARD     ");
+        Console.WriteLine("");
+        Console.WriteLine($"Welcome,Admin {Username}");
+        Console.WriteLine("Level: Super");
+        Console.WriteLine("                          ");
+        Console.WriteLine("[1] Manage Users");
+        Console.WriteLine("[2] Manage Courses");
+        Console.WriteLine("[3] View System Reports");
+        Console.WriteLine("[4] System Settings");
+        Console.WriteLine("[5] Logout");
     }
 }
 

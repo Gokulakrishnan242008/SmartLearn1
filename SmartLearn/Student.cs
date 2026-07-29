@@ -7,7 +7,8 @@ public abstract class  Student : User
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
- 
+    List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
+
     public Student(string username, string password, string email) : base(username, password, email)
     {
         EnrolledCourseIds = new List<int>();
@@ -20,7 +21,7 @@ public abstract class  Student : User
     public override void DisplayInfo()
     {
             base.DisplayInfo();
-        Console.WriteLine($"enrolled courses;{enr "
+        Console.WriteLine($"enrolled courses;{enrollments.Count}");
     }
     public List<int>GetCompletedCourses()
     {
