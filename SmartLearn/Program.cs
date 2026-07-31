@@ -84,20 +84,20 @@ class Program
             }
         Console.Write("Enter role:(student/Instructor/Admin):");
         string role = Console.ReadLine();
-        if (role != "student" && role != "Instructor" && role != "Admin")
-        {
-            Console.WriteLine("Invaild role.please choose from student,Instructoror admin");
-            return;
-        }
+            if (role != "student" && role != "Instructor" && role != "Admin")
+            {
+                Console.WriteLine("Invaild role.please choose from student,Instructoror admin");
+                return;
+            }
 
-            if (role.Equals("Student", StringComparison.OrdinalIgnoreCase))
-            {
-                Student student = new Student(username, password, email);
-            }
-            else if(role.Equals("Instructor,StringComparsion.OrdinalIgnoreCase"))
-            {
-                Instructor instructor= new Instructor(username, password, email);
-            }
+            //if (role.Equals("Student", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    Student student = new Student(username, password, email);
+            //}
+            //else if(role.Equals("Instructor",StringComparsion.OrdinalIgnoreCase))
+            //{
+            //    Instructor instructor= new Instructor(username, password, email);
+            //}
 
 
 
@@ -117,25 +117,13 @@ class Program
         
        
            bool isLoggedIn =true;
+            if (isLoggedIn)
             {
-                switch (role)
-                {
-                    case "student":
-                        Student student = new Student(username, password, email );
-                        showstudentdashboard();
-                        break;
-                    case "Instructor":
-                        Instructor instructor = new Instructor(username, password, email);
-                        showinstructordashboard();
-                        break;
-                    case "Admin":
-                        Admin admin = new Admin(username, password, email);
-                        showadmindashboard();
-                        break;
-                    default:
-                        Console.WriteLine("not valid"); break;
-                }
+                currentUser.DisplayDashboard();
             }
+         
+                
+            
     }
             static void LoadSampleCourses()
          {
@@ -391,112 +379,112 @@ class Program
 
             admin.DeactivateUser(userToDeactivate);
         }
-        
 
-            static void showstudentdashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Student Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.BrowseCourse");
-            Console.WriteLine("2.My Course");
-            Console.WriteLine("3.Progress");
-            Console.WriteLine("4.Take Quiz ");
-            Console.WriteLine("5.Logout");
-            Console.Write("Enter your choice:");
-            string studentChoice = Console.ReadLine();
-            {
-                switch (studentChoice)
-                {
-                    case "1":
-                        BrowseAndEnrollCourses();break;
-                     case "2":
-                        Console.WriteLine("My Course feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("Progress feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Take Quiz feature coming soon");
-                        break;
-                    case "5":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-5");
-                        break;
-                }
-            }
 
-        }
-        static void showinstructordashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Instructor Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.My Course");
-            Console.WriteLine("2.Create Course");
-            Console.WriteLine("3.View Student Progress");
-            Console.WriteLine("4.Grade Assignments");
-            Console.WriteLine("5.Logout");
-            Console.Write("Enter your choice:");
-            string instructorChoice = Console.ReadLine();
-            {
-                switch (instructorChoice)
-                {
-                    case "1":
-                        Console.WriteLine("My Course feature coming soon");
-                        break;
-                    case "2":
-                        Console.WriteLine("Create Course feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("View Student Progress feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Grade Assignments feature coming soon");
-                        break;
-                    case "5":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-5");
-                        break;
-                }
-            }
-        }
-        static void showadmindashboard()
-        {
-            Console.WriteLine("================================");
-            Console.WriteLine("Welcome to the Admin Dashboard");
-            Console.WriteLine("================================");
-            Console.WriteLine("1.Manage Users");
-            Console.WriteLine("2.Manage Courses");
-            Console.WriteLine("3.View Reports");
-            Console.WriteLine("4.Logout");
-            Console.Write("Enter your choice:");
-            string adminChoice = Console.ReadLine();
-            {
-                switch (adminChoice)
-                {
-                    case "1":
-                        Console.WriteLine("Manage Users feature coming soon");
-                        break;
-                    case "2":
-                        Console.WriteLine("Manage Courses feature coming soon");
-                        break;
-                    case "3":
-                        Console.WriteLine("View Reports feature coming soon");
-                        break;
-                    case "4":
-                        Console.WriteLine("Logout feature coming soon");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.Please choose from 1-4");
-                        break;
-                }
-            }
-        }
+        //static void showstudentdashboard(Student)
+        //{
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("Welcome to the Student Dashboard");
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("1.BrowseCourse");
+        //    Console.WriteLine("2.My Course");
+        //    Console.WriteLine("3.Progress");
+        //    Console.WriteLine("4.Take Quiz ");
+        //    Console.WriteLine("5.Logout");
+        //    Console.Write("Enter your choice:");
+        //    string studentChoice = Console.ReadLine();
+        //    {
+        //        switch (studentChoice)
+        //        {
+        //            case "1":
+        //                BrowseAndEnrollCourses();break;
+        //             case "2":
+        //                Console.WriteLine("My Course feature coming soon");
+        //                break;
+        //            case "3":
+        //                Console.WriteLine("Progress feature coming soon");
+        //                break;
+        //            case "4":
+        //                Console.WriteLine("Take Quiz feature coming soon");
+        //                break;
+        //            case "5":
+        //                Console.WriteLine("Logout feature coming soon");
+        //                break;
+        //            default:
+        //                Console.WriteLine("Invalid choice.Please choose from 1-5");
+        //                break;
+        //        }
+        //    }
+
+        //}
+        //static void showinstructordashboard(Instructor)
+        //{
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("Welcome to the Instructor Dashboard");
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("1.My Course");
+        //    Console.WriteLine("2.Create Course");
+        //    Console.WriteLine("3.View Student Progress");
+        //    Console.WriteLine("4.Grade Assignments");
+        //    Console.WriteLine("5.Logout");
+        //    Console.Write("Enter your choice:");
+        //    string instructorChoice = Console.ReadLine();
+        //    {
+        //        switch (instructorChoice)
+        //        {
+        //            case "1":
+        //                Console.WriteLine("My Course feature coming soon");
+        //                break;
+        //            case "2":
+        //                Console.WriteLine("Create Course feature coming soon");
+        //                break;
+        //            case "3":
+        //                Console.WriteLine("View Student Progress feature coming soon");
+        //                break;
+        //            case "4":
+        //                Console.WriteLine("Grade Assignments feature coming soon");
+        //                break;
+        //            case "5":
+        //                Console.WriteLine("Logout feature coming soon");
+        //                break;
+        //            default:
+        //                Console.WriteLine("Invalid choice.Please choose from 1-5");
+        //                break;
+        //        }
+        //    }
+        //}
+        //static void showadmindashboard(Admin)
+        //{
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("Welcome to the Admin Dashboard");
+        //    Console.WriteLine("================================");
+        //    Console.WriteLine("1.Manage Users");
+        //    Console.WriteLine("2.Manage Courses");
+        //    Console.WriteLine("3.View Reports");
+        //    Console.WriteLine("4.Logout");
+        //    Console.Write("Enter your choice:");
+        //    string adminChoice = Console.ReadLine();
+        //    {
+        //        switch (adminChoice)
+        //        {
+        //            case "1":
+        //                Console.WriteLine("Manage Users feature coming soon");
+        //                break;
+        //            case "2":
+        //                Console.WriteLine("Manage Courses feature coming soon");
+        //                break;
+        //            case "3":
+        //                Console.WriteLine("View Reports feature coming soon");
+        //                break;
+        //            case "4":
+        //                Console.WriteLine("Logout feature coming soon");
+        //                break;
+        //            default:
+        //                Console.WriteLine("Invalid choice.Please choose from 1-4");
+        //                break;
+        //        }
+        //    }
+        //}
 
         bool isLoggedIn = false;
 

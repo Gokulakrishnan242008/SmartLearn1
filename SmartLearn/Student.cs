@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-public abstract class  Student : User
+public abstract class  Student : User,ISearchable
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }

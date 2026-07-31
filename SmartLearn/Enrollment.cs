@@ -38,6 +38,6 @@ namespace SmartLearn
         public void UpdateProgress(int ProgressPercentage)
         { }
 
-
+        
     }
 }

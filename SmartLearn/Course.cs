@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Linq;
 
 namespace SmartLearn
 {
-    
-    public class Course
+   
+    public abstract class Course:IEnrollable,ISearchable,IRatable
     {
+        private List<int> ratings = new List<int>();
+        private List<string> reviews = new List<string>();
         public int CourseId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -56,7 +59,57 @@ namespace SmartLearn
                 CurrentEnrollments--;
             }
         }
-      
+        public void Enroll(Student student)
+        {
+            if (CanEnroll(student))
+            {
+                CurrentEnrollments++;
+                student.EnrollInCourse();
+                if (student is INotifiable notifiable)
+                {
+                    notifiable.RecieveNotification($"Successfully enrolled in {Title}");
+                }
+            }
+        }
+        public void Drop()
+        {
+            if (CurrentEnrollments > 0)
+            {
+                CurrentEnrollments--;
+            }
+        }
+        public bool MatchesSearch(string keyword)
+        { 
+           if(string.IsNullOrWhiteSpace(keyword))
+                return false;
+                 keyword=keyword.ToLower();
+            return Title.ToLower().Contains(keyword) || Description.ToLower().Contains(keyword) || Category.ToLower().Contains(keyword)||InstructorName.ToLower().Contains(keyword);
+        }
+        public string GetSearchSummary()
+        { 
+            return $"Course.:{Title}|Category:{Category}|Instructor:{InstructorName}";
+        }
 
+        public void AddRating(int stars, string review)
+        {
+            if (stars < 1 || stars > 5)
+            {
+                Console.WriteLine("stars must be 1-5");
+            }
+            ratings.Add(stars);
+            reviews.Add(review);
+            Console.WriteLine("Ratings added Successfully!");
+        }
+        public double GetAverageRating()
+        {
+            if (ratings.Count == 0)
+            {
+                return 0;
+            }
+        }
+        public int GetTotalRating()
+        {
+            return ratings().Count;
+        }
     }
 }
