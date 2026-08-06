@@ -9,8 +9,8 @@ namespace SmartLearn
     {
         void Enroll(Student student);
         void Drop(Student student);
-        bool CanEnroll(Student student);
-         int GetAvailableSeats();
+       public abstract bool CanEnroll(Student student);
+         public abstract int GetAvailableSeats();
 
         
         

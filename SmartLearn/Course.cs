@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace SmartLearn
 {
-   
-    public abstract class Course:IEnrollable,ISearchable,IRatable
+
+    public abstract class Course : IEnrollable, ISearchable, IRatable
     {
         private List<int> ratings = new List<int>();
         private List<string> reviews = new List<string>();
@@ -16,20 +16,20 @@ namespace SmartLearn
         public string Description { get; set; }
         public string InstructorName { get; set; }
         public int MaxStudents { get; set; }
-        public int CurrentEnrollments {  get; set; }
+        public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
 
-        public Course(int courseId,string title, string description, string instructorName, int maxStudents,int currentEnrollments,string category)
+        public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category)
         {
             CourseId = courseId;
             Title = title;
             Description = description;
             InstructorName = instructorName;
-            MaxStudents = maxStudents ;
+            MaxStudents = maxStudents;
             CurrentEnrollments = currentEnrollments;
-            Category = category; 
+            Category = category;
         }
-        public void DisplayInfo()
+        public  void DisplayInfo()
         {
             Console.WriteLine($"CourseId:{CourseId}");
             Console.WriteLine($"Title: {Title}");
@@ -39,17 +39,17 @@ namespace SmartLearn
             Console.WriteLine($"CurrentEnrollments:{CurrentEnrollments}");
             Console.WriteLine($"Category:{Category}");
         }
-        public bool CanEnroll()
+        public override bool CanEnroll(Student student)
         {
             return CurrentEnrollments < MaxStudents;
 
-         }
+        }
         public void IncrementEnrollment()
         {
             if (CurrentEnrollments < MaxStudents)
             {
                 CurrentEnrollments++;
-                
+
             }
         }
         public void DecrementEnrollment()
@@ -79,14 +79,14 @@ namespace SmartLearn
             }
         }
         public bool MatchesSearch(string keyword)
-        { 
-           if(string.IsNullOrWhiteSpace(keyword))
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
                 return false;
-                 keyword=keyword.ToLower();
-            return Title.ToLower().Contains(keyword) || Description.ToLower().Contains(keyword) || Category.ToLower().Contains(keyword)||InstructorName.ToLower().Contains(keyword);
+            keyword = keyword.ToLower();
+            return Title.ToLower().Contains(keyword) || Description.ToLower().Contains(keyword) || Category.ToLower().Contains(keyword) || InstructorName.ToLower().Contains(keyword);
         }
         public string GetSearchSummary()
-        { 
+        {
             return $"Course.:{Title}|Category:{Category}|Instructor:{InstructorName}";
         }
 
@@ -111,5 +111,7 @@ namespace SmartLearn
         {
             return ratings().Count;
         }
+        public abstract int GetAvailableSeats();
+        public abstract string GetCourseType();
     }
 }

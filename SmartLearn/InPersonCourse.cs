@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SmartLearn
 {
-    public class InPersonCourse:Course
+    public abstract class InPersonCourse:Course
     {
         public string RoomNumber {  get; set; }
         public string Building {  get; set; }
@@ -13,6 +13,14 @@ namespace SmartLearn
         {
             RoomNumber = roomNumber;
             Building = building;
+        }
+        public override bool CanEnroll(Student student)
+        {
+            if (CurrentEnrollments<MaxStudents)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
