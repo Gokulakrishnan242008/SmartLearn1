@@ -18,8 +18,9 @@ namespace SmartLearn
         public int MaxStudents { get; set; }
         public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
+        public string CurrentStudents { get; set; }
 
-        public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category)
+        public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,string currentStudents)
         {
             CourseId = courseId;
             Title = title;
@@ -28,6 +29,7 @@ namespace SmartLearn
             MaxStudents = maxStudents;
             CurrentEnrollments = currentEnrollments;
             Category = category;
+            CurrentStudents = currentStudents;
         }
         public  void DisplayInfo()
         {
@@ -38,6 +40,7 @@ namespace SmartLearn
             Console.WriteLine($"MaxStudents:{MaxStudents}");
             Console.WriteLine($"CurrentEnrollments:{CurrentEnrollments}");
             Console.WriteLine($"Category:{Category}");
+            Console.WriteLine($"CurrentStudents:{CurrentStudents}");.
         }
         public override bool CanEnroll(Student student)
         {

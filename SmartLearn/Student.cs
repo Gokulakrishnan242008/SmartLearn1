@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-public abstract class  Student : User,ISearchable
+public abstract class  Student : User,ISearchable,INotifiable
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
@@ -121,5 +121,14 @@ public abstract class  Student : User,ISearchable
         Console.WriteLine("[4] My Statistics");
         Console.WriteLine("[5] Logout");
 
+    }
+    public  override bool MatchesSearch(string keyword)
+    {
+        
+    return Username.Contains(keyword,StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
+    } 
+    public override string GetSearchSummary()
+    {
+                return $"[Student]{Username}{Email}-{EnrolledCourse.Count}courses";
     }
 }
