@@ -122,13 +122,26 @@ public abstract class  Student : User,ISearchable,INotifiable
         Console.WriteLine("[5] Logout");
 
     }
-    public  override bool MatchesSearch(string keyword)
-    {
-        
-    return Username.Contains(keyword,StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
+    public override bool MatchesSearch(string keyword)
+    { 
+        return Username.Contains(keyword,StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
     } 
     public override string GetSearchSummary()
     {
                 return $"[Student]{Username}{Email}-{EnrolledCourse.Count}courses";
     }
+    private List<string>notifications=new List<string>();
+    public void SendNotification(string message)
+    {
+        string notificattion = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{message}";
+        notifications.Add(notificattion);
+        Console.WriteLine(notificattion);
+    }
+    
+    public List <string>GetNotificationHistory()
+    { 
+        return new List<string>(notifications) ;
+            
+    }
+    p
 }

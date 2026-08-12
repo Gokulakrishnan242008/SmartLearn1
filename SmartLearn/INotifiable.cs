@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SmartLearn
 {
-    interface INotifiable
+    public interface INotifiable
     {
-        void SendNotification(string message);
-        List<string> GetNotificationHistory();
+     public   abstract void SendNotification(string message);
+        public List<string> GetNotificationHistory();
     }
 }

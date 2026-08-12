@@ -73,6 +73,10 @@ namespace SmartLearn
                     notifiable.RecieveNotification($"Successfully enrolled in {Title}");
                 }
             }
+            if(Instructor is INotifiable instructorNotifiable)
+            {
+                instructorNotifiable.SendNotification($"{student.Username}has enrolled in your course:{Title}");
+            }
         }
         public void Drop()
         {
@@ -116,5 +120,6 @@ namespace SmartLearn
         }
         public abstract int GetAvailableSeats();
         public abstract string GetCourseType();
+        
     }
 }

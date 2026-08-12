@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Instructor : User
+public abstract class Instructor : User,INotifiable
 {
     public string Department {  get; set; }
     public List<Course> CoursesTeaching { get; set; }= new List<Course>();
@@ -100,5 +100,17 @@ public abstract class Instructor : User
         Console.WriteLine("View Student Roster");
         Console.WriteLine("Grade Assignments");
         Console.WriteLine("Logout");
+    }
+    public void SendNotification(string message)
+    {
+        string notificattion = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{message}";
+        notifications.Add(notificattion);
+        Console.WriteLine(notificattion);
+    }
+
+    public List<string> GetNotificationHistory()
+    {
+        return new List<string>(notifications);
+
     }
 }

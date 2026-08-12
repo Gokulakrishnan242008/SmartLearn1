@@ -10,8 +10,46 @@ namespace SmartLearn
     public abstract class User
     {
         public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
+        private string Password { get; set; }
+        public string password 
+        {
+            get { return Password; }
+            set
+            {
+                if(value==null||value.Length<8)
+                {
+
+                    Console.WriteLine("Error:Password must be at leastv * characters long.");
+                    return;
+                }
+                if (!value.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Error:Password must contain at least 1 digit.");
+                    return;
+                }
+                password= value;
+            }
+
+        }
+        private string email;
+        public string Email 
+        {
+            get { return email; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+            {
+                    Console.WriteLine("Error:Email cannot be empty.");
+                    return;
+            }
+                if(!value.Contains("@"))
+                {
+                    Console.WriteLine("Error:Email must contain'@'.");
+                    return;
+                }
+                email= value;
+            }
+        }
 
         //public string Role { get; set; }
 
@@ -24,6 +62,7 @@ namespace SmartLearn
             IsActive = true;
             DateRegistered = DateTime.Now;
         }
+        
 
         public virtual void DisplayInfo()
         {
