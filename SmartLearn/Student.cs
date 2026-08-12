@@ -143,5 +143,5 @@ public abstract class  Student : User,ISearchable,INotifiable
         return new List<string>(notifications) ;
             
     }
-    p
+    
 }
