@@ -8,6 +8,20 @@ public abstract class  Student : User,ISearchable,INotifiable
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
+    public int ProgressPercentage{ get; set;  }
+    private int progressPercentage
+    {
+        get { return ProgressPercentage; }
+        set
+        {
+            if (value < 0 || value > 100)
+            {
+                Console.WriteLine("Error:Title must be 1-100 characters");
+                return;
+            }
+            ProgressPercentage = value;
+        }
+    }
 
     public Student(string username, string password, string email) : base(username, password, email)
     {

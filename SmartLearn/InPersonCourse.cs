@@ -8,8 +8,22 @@ namespace SmartLearn
     {
         public int RoomNumber {  get; set; }
         public string Building {  get; set; }
+        public int MaxStudents {  get; set; }
+        private int maxStudents
+        {
+            get { return MaxStudents; }
+            set
+            {
+                if (value > 0)
+                {
+                    Console.WriteLine("Error:Max students must be greater than 0");
+                    return;
+                }
+                value = MaxStudents;
+            }
+        }
 
-        public InPersonCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category, int roomNumber, string building):base(courseId, title, description, instructorName, maxStudents, currentEnrollments, category)
+        public InPersonCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category, string currentStudents,int roomNumber, string building):base(courseId, title, description, instructorName, maxStudents, currentEnrollments, category,currentStudents )
         {
             RoomNumber = roomNumber;
             Building = building;

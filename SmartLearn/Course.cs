@@ -13,6 +13,22 @@ namespace SmartLearn
         private List<string> reviews = new List<string>();
         public int CourseId { get; set; }
         public string Title { get; set; }
+        private string title 
+        { get { return Title; }
+            set
+            {
+                if(string.IsNullOrWhiteSpace(value))
+                {
+                    Console.WriteLine("Title Cannot be null,empty or WhiteSpace");
+                    return;
+                }
+                if(value.Length>100)
+                {
+                    Console.WriteLine("Error:Title must be 1-100");
+                    return;
+                }
+            }
+        }
         public string Description { get; set; }
         public string InstructorName { get; set; }
         public int MaxStudents { get; set; }

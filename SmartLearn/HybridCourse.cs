@@ -7,6 +7,19 @@ namespace SmartLearn
     public abstract class HybridCourse:Course
     {
         public int MaxStudents { get; set; }
+        private int maxStudents 
+        {
+            get {  return MaxStudents; }
+            set
+            {
+                if(value > 0)
+                {
+                    Console.WriteLine("Error:Max students must be greater than 0");
+                    return;
+                }
+                value = MaxStudents;
+            }
+        }
         public string RoomNumber { get; set; }
         public string Building { get; set; }
         public int OnlineVideoDuration { get; set; }
