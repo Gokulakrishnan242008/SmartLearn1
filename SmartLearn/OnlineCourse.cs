@@ -46,5 +46,10 @@ namespace SmartLearn
             Console.WriteLine("Status:Open For Enrollment");
 
         }
+        static void InitializeCourses()
+        {
+            Courses.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith", "Programming"));
+            Courses.
+        }
     }
 }
