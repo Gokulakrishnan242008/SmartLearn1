@@ -49,7 +49,28 @@ class Program
             }
             return true;
         }
-    static void Register()
+        static void UniversalSearch(List<Course> courses, List<User> users)
+        {
+            List<ISearchable> searchableItems = new List<ISearchable>();
+            foreach (Course course in courses)
+            {
+                searchableItems.Add(course);
+            }
+
+            foreach (User user in users)
+            {
+                if (user is ISearchable searchableusers)
+                {
+                    searchableItems.Add(searchableusers);
+                }
+            }
+            Console.WriteLine("Enter Search keyword=");
+            string keyword = Console.ReadLine();
+            List<ISearchable> results = SearchEngine.Search(searchableItems, keyword);
+            SearchEngine.DisplayResults(results);
+            
+        }
+        static void Register()
     {
         Console.WriteLine("===Register===");
         Console.Write("Enter username:");
@@ -498,6 +519,7 @@ class Program
         {
             Console.WriteLine("Exiting the application...");
         }
+        
     }
 }
 
