@@ -34,9 +34,9 @@ namespace SmartLearn
         public int MaxStudents { get; set; }
         public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
-        public string CurrentStudents { get; set; }
+        public int CurrentStudents { get; set; }
 
-        public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,string currentStudents)
+        public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,int currentStudents)
         {
             CourseId = courseId;
             Title = title;
@@ -47,7 +47,7 @@ namespace SmartLearn
             Category = category;
             CurrentStudents = currentStudents;
         }
-        public  void DisplayInfo()
+        public  void DisplayCourseInfo()
         {
             Console.WriteLine($"CourseId:{CourseId}");
             Console.WriteLine($"Title: {Title}");
@@ -94,7 +94,7 @@ namespace SmartLearn
                 instructorNotifiable.SendNotification($"{student.Username}has enrolled in your course:{Title}");
             }
         }
-        public void Drop()
+        public void Drop(Student student)
         {
             if (CurrentEnrollments > 0)
             {
@@ -129,13 +129,56 @@ namespace SmartLearn
             {
                 return 0;
             }
+            return ratings.Average();
         }
-        public int GetTotalRating()
+        public int GetTotalRatings()
         {
-            return ratings().Count;
+            return ratings.Count;
         }
         public abstract int GetAvailableSeats();
         public abstract string GetCourseType();
-        
+        static void BrowseCourses()
+        {
+            Console.Clear();
+
+            Console.WriteLine("╔══════════════════════════════════════════════════╗");
+            Console.WriteLine("║                 AVAILABLE COURSES                ║");
+            Console.WriteLine("╚══════════════════════════════════════════════════╝");
+
+            // Display every course using polymorphism
+            foreach (Course course in courses)
+            {
+                Console.WriteLine();
+                course.DisplayCourseInfo();
+
+                Console.WriteLine($"Can Enroll: {(course.CanEnroll() ? "Yes" : "No")}");
+                Console.WriteLine("──────────────────────────────────────────────────");
+            }
+
+            Console.Write("\nEnter Course ID to enroll: ");
+            string courseId = Console.ReadLine();
+
+            // Find selected course
+            Course selectedCourse = courses.FirstOrDefault(c => c.CourseId.Equals(courseId, StringComparison.OrdinalIgnoreCase));
+
+            if (selectedCourse == null)
+            {
+                Console.WriteLine("Course not found.");
+                return;
+            }
+
+            // Polymorphic CanEnroll()
+            if (!selectedCourse.CanEnroll())
+            {
+                Console.WriteLine("❌ You cannot enroll in this course.");
+                return;
+            }
+
+            // Polymorphic Enroll()
+            selectedCourse.Enroll(currentUser);
+
+            Console.WriteLine("✅ Enrollment completed successfully!");
+        }
+
     }
 }

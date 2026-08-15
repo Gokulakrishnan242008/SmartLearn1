@@ -6,7 +6,7 @@ namespace SmartLearn
 {
     interface ISearchable
     {
-       public abstract bool MatchesSearch(string keyword);
+       public  bool MatchesSearch(string keyword);
         string GetSearchSummary();
     }
 }

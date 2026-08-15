@@ -26,7 +26,7 @@ namespace SmartLearn
         public List<DateTime> InPersonSessions { get; set; }=new List<DateTime>();
         
 
-        public HybridCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category, string currentStudents, int onlineVideoDuration, int roomNumber, string building, List<DateTime> inPersonSessions) : base(courseId, title, description, instructorName, maxStudents, currentEnrollments, category, currentStudents)
+        public HybridCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category, int currentStudents, int onlineVideoDuration, int roomNumber, string building, List<DateTime> inPersonSessions) : base(courseId, title, description, instructorName, maxStudents, currentEnrollments, category, currentStudents)
         {
             MaxStudents = maxStudents;
             RoomNumber = roomNumber;
@@ -34,10 +34,11 @@ namespace SmartLearn
             OnlineVideoDuration = onlineVideoDuration;
             InPersonSessions = inPersonSessions;
         }
+        static List<Course> course = new List<Course>();
         static void InitializeCourses()
         {
-            Course.Add(new HybridCourse(301, "Full-Stack Development", "Learn data science concepts and techniques", "Prof. Smith", 30, 0, "Data Science", "", 720, 101, "Building A", new List<DateTime> { new DateTime(2024, 6, 1, 9, 0, 0), new DateTime(2024, 6, 8, 9, 0, 0) }));
-            Course.Add(new HybridCourse(302, "Web Development Bootcamp", "Learn web development concepts and techniques", "Prof. Johnson", 25, 0, "Web Development", "", 600, 205, "Building B", new List<DateTime> { new DateTime(2024, 6, 2, 10, 0, 0), new DateTime(2024, 6, 9, 10, 0, 0) }));
+            course.Add(new HybridCourse(301, "Full-Stack Development", "Learn data science concepts and techniques", "Prof. Smith", 30, 0, "Data Science", 0, 720, 101, "Building A", new List<DateTime> { new DateTime(2024, 6, 1, 9, 0, 0), new DateTime(2024, 6, 8, 9, 0, 0) }));
+            course.Add(new HybridCourse(302, "Web Development Bootcamp", "Learn web development concepts and techniques", "Prof. Johnson", 25, 0, "Web Development", 0, 600, 205, "Building B", new List<DateTime> { new DateTime(2024, 6, 2, 10, 0, 0), new DateTime(2024, 6, 9, 10, 0, 0) }));
         }
         public override bool CanEnroll(Student student)
         {

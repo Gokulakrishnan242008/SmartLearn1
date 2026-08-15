@@ -8,6 +8,7 @@ public abstract class Instructor : User,INotifiable
     public string Department {  get; set; }
     public List<Course> CoursesTeaching { get; set; }= new List<Course>();
     public List<int> CreatedCourseIds { get; set; }
+    public List<string> notifications { get; set; } = new List<string>();
     public Instructor(string username, string password, string email) : base(username, password, email)
     {
         CreatedCourseIds = new List<int>();
@@ -43,7 +44,7 @@ public abstract class Instructor : User,INotifiable
         {
             if (course.CourseId == courseId)
             {
-                course.DisplayInfo();
+                course.DisplayCourseInfo();
                 return;
             }
         }

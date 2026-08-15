@@ -8,6 +8,7 @@ public abstract class  Student : User,ISearchable,INotifiable
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
+    public List<Course>EnrolledCourses= new List<Course>();
     public int ProgressPercentage{ get; set;  }
     private int progressPercentage
     {
@@ -136,13 +137,13 @@ public abstract class  Student : User,ISearchable,INotifiable
         Console.WriteLine("[5] Logout");
 
     }
-    public override bool MatchesSearch(string keyword)
+    public  bool MatchesSearch(string keyword)
     { 
         return Username.Contains(keyword,StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
     } 
-    public override string GetSearchSummary()
+    public  string GetSearchSummary()
     {
-                return $"[Student]{Username}{Email}-{EnrolledCourse.Count}courses";
+                return $"[Student]{Username}{Email}-{EnrolledCourses.Count}courses";
     }
     private List<string>notifications=new List<string>();
     public void SendNotification(string message)
