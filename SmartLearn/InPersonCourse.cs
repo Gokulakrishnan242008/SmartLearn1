@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SmartLearn
 {
-    public abstract class InPersonCourse:Course
+    public class InPersonCourse:Course
     {
         public int RoomNumber {  get; set; }
         public string Building {  get; set; }
@@ -27,6 +27,12 @@ namespace SmartLearn
         {
             RoomNumber = roomNumber;
             Building = building;
+        }
+        static void InitializeCourses()
+        {
+            Course.Add(new InPersonCourse (201, "Database Design Workshop", "Learn the basics of programming using C#", "John Smith", 25, 0, "Computer Science",0,  101, "Room A"));
+            Course.Add(new InPersonCourse(202, "Network Security Lab", "Practical Laboratory sessions covering network security", "John steve", 20, 0, "Web Development",0, 205, "Room C"));
+            Course.Add(new InPersonCourse(203,"Mobile App Development","Learn the fundamentals of mobile application development ","John keyn",30,0,"Web Development",0,301,"Room A"));
         }
         public override bool CanEnroll(Student student)
         {

@@ -56,7 +56,7 @@ namespace SmartLearn
             Console.WriteLine($"MaxStudents:{MaxStudents}");
             Console.WriteLine($"CurrentEnrollments:{CurrentEnrollments}");
             Console.WriteLine($"Category:{Category}");
-            Console.WriteLine($"CurrentStudents:{CurrentStudents}");.
+            Console.WriteLine($"CurrentStudents:{CurrentStudents}");
         }
         public override bool CanEnroll(Student student)
         {
