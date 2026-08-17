@@ -35,7 +35,7 @@ namespace SmartLearn
             course.Add(new InPersonCourse(202, "Network Security Lab", "Practical Laboratory sessions covering network security", "John steve", 20, 0, "Web Development",0, 205, "Room C"));
             course.Add(new InPersonCourse(203,"Mobile App Development","Learn the fundamentals of mobile application development ","John keyn",30,0,"Web Development",0,301,"Room A"));
         }
-        public override bool CanEnroll(Student student)
+        public bool CanEnroll(Student student)
         {
             if (CurrentEnrollments<MaxStudents)
             {

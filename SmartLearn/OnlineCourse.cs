@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace SmartLearn
  {
@@ -48,7 +49,7 @@ namespace SmartLearn
         }
         static void InitializeCourses()
         {
-            Course.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith", "Programming",450));
+            Course.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith",20,0, "Programming",450, "https.//smartLearn.com/stream"));
             Course.Add(new OnlineCourse(102,"Python for Beginners","Learn Python programming from the basics.","Prof. Johnson","Programming",360));
             Course.Add(new OnlineCourse(103,"Web Development Basics","Learn the basics of HTML, CSS and web development.","Prof. Williams","Web Development",540));
             Course.Add(new OnlineCourse(104,"Data Structures","Learn arrays, lists, stacks, queues and other data structures.","Prof. Brown","Computer Science",600));

@@ -341,7 +341,7 @@ class Program
 
         static void AddInstructorCourse(Instructor instructor)
         {
-            LoadSampleCourses();
+            
 
             Console.Write("\nEnter Course ID to add: ");
             if (!int.TryParse(Console.ReadLine(), out int courseId))

@@ -58,7 +58,7 @@ namespace SmartLearn
             Console.WriteLine($"Category:{Category}");
             Console.WriteLine($"CurrentStudents:{CurrentStudents}");
         }
-        public override bool CanEnroll(Student student)
+        public bool CanEnroll(Student student)
         {
             return CurrentEnrollments < MaxStudents;
 
@@ -175,7 +175,10 @@ namespace SmartLearn
             }
 
             // Polymorphic Enroll()
-            selectedCourse.Enroll(currentUser);
+            if (currentUser is Student student)
+            {
+                selectedCourse.Enroll(student);
+            }
 
             Console.WriteLine("✅ Enrollment completed successfully!");
         }
