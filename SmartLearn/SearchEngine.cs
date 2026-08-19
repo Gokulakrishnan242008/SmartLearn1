@@ -7,7 +7,7 @@ namespace SmartLearn
 {
     class SearchEngine
     {
-        public static class Search()
+        public class Search()
         {
            
             public static List<ISearchable> Searchs(List<ISearchable> items, string keyword)
@@ -23,6 +23,7 @@ namespace SmartLearn
                 }
                 return results;
             }
+             List<string> GetSearchSummary();
             public static void DisplayResults(List<ISearchable> results)
             { 
                 if(results.Count==0)
@@ -31,6 +32,7 @@ namespace SmartLearn
                     return;
                 }
                 Console.WriteLine($"\n===Search Results===({results.Count})");
+                
                 foreach (ISearchable result in results)
                 {
                     Console.WriteLine($"{results.GetSearchSummary()}");
