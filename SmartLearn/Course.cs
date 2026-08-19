@@ -137,6 +137,7 @@ namespace SmartLearn
         }
         public abstract int GetAvailableSeats();
         public abstract string GetCourseType();
+        static List<Course> courses = new List<Course>();
         static void BrowseCourses()
         {
             Console.Clear();
@@ -146,6 +147,7 @@ namespace SmartLearn
             Console.WriteLine("╚══════════════════════════════════════════════════╝");
 
             // Display every course using polymorphism
+            
             foreach (Course course in courses)
             {
                 Console.WriteLine();

@@ -9,6 +9,15 @@ public abstract class  Student : User,ISearchable,INotifiable
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
     public List<Course>EnrolledCourses= new List<Course>();
+    public List<String> RecieveNotification(string message)
+    {
+       List<string> notifications = new List<string>();
+    string notification = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}";
+    notifications.Add(notification);
+        Console.WriteLine(notification);
+        return notifications;
+    }
+
     public int ProgressPercentage{ get; set;  }
     private int progressPercentage
     {

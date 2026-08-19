@@ -15,14 +15,14 @@ namespace SmartLearn
         public string Capacity {  get; private set; }
         public int CurrentStudents { get; set; }
 
-            public OnlineCourse(int courseId,string title,string description,string instructorName,int maxStudents,int currentEnrollments,string category,int videoDurationMinutes,int streamUrl,string capacity,int currentStudents):base(courseId,title,description,instructorName,maxStudents,currentEnrollments,category)
+            public OnlineCourse(int courseId,string title,string description,string instructorName,int maxStudents,int currentEnrollments,string category,int videoDurationMinutes,int streamUrl,string capacity,int currentStudents):base(courseId,title,description,instructorName,maxStudents,currentEnrollments,category,currentStudents)
         {
             VideoDurationMinutes = videoDurationMinutes;
             StreamUrl = "https.//smartLearn.com/stream"+CourseId;
             Capacity = "Unlimited";
             CurrentStudents = currentStudents;
         }
-        public override bool CanEnroll(Student student) 
+        public bool CanEnroll(Student student) 
         { 
             return true;
         }
@@ -47,13 +47,14 @@ namespace SmartLearn
             Console.WriteLine("Status:Open For Enrollment");
 
         }
+        static List<Course>Courses = new List<Course>();
         static void InitializeCourses()
         {
-            Course.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith",20,0, "Programming",450, "https.//smartLearn.com/stream"));
-            Course.Add(new OnlineCourse(102,"Python for Beginners","Learn Python programming from the basics.","Prof. Johnson","Programming",360));
-            Course.Add(new OnlineCourse(103,"Web Development Basics","Learn the basics of HTML, CSS and web development.","Prof. Williams","Web Development",540));
-            Course.Add(new OnlineCourse(104,"Data Structures","Learn arrays, lists, stacks, queues and other data structures.","Prof. Brown","Computer Science",600));
-            Course.Add(new OnlineCourse(105,"Machine Learning Intro","Introduction to machine learning concepts and techniques.","Prof. Davis","Machine Learning",720));
+            Courses.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith",20,0, "Programming",450, "https.//smartLearn.com/stream","Unlimited"));
+            Courses.Add(new OnlineCourse(102,"Python for Beginners","Learn Python programming from the basics.","Prof. Johnson","Programming",360));
+            Courses.Add(new OnlineCourse(103,"Web Development Basics","Learn the basics of HTML, CSS and web development.","Prof. Williams","Web Development",540));
+            Courses.Add(new OnlineCourse(104,"Data Structures","Learn arrays, lists, stacks, queues and other data structures.","Prof. Brown","Computer Science",600));
+            Courses.Add(new OnlineCourse(105,"Machine Learning Intro","Introduction to machine learning concepts and techniques.","Prof. Davis","Machine Learning",720));
         }
     }
 }
