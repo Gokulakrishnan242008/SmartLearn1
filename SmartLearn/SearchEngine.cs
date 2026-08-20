@@ -5,25 +5,30 @@ using System.Text;
 
 namespace SmartLearn
 {
-    class SearchEngine
+    public class SearchEngine
     {
-        public class Search()
-        {
+        
+        
            
-            public static List<ISearchable> Searchs(List<ISearchable> items, string keyword)
+            public static List<ISearchable> Search(List<ISearchable> items, string keyword)
             {
                 List<ISearchable> results = new List<ISearchable>();
 
                 foreach (ISearchable item in items)
                 {
-                    if (items.MatchesSearch(keyword))
+                    if (item.MatchesSearch(keyword))
                     {
                         results.Add(item);
                     }
                 }
                 return results;
             }
-             List<string> GetSearchSummary();
+            public List<string> GetSearchSummary()
+            {
+                List <string> summary=new List<string> ();
+                return summary;
+            }
+            
             public static void DisplayResults(List<ISearchable> results)
             { 
                 if(results.Count==0)
@@ -35,11 +40,11 @@ namespace SmartLearn
                 
                 foreach (ISearchable result in results)
                 {
-                    Console.WriteLine($"{results.GetSearchSummary()}");
+                    Console.WriteLine($"{result.GetSearchSummary()}");
                  }
                     
             }
             
         }
     }
-}
+

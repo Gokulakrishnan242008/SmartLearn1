@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SmartLearn
 {
-    interface ISearchable
+    public interface ISearchable
     {
        public  bool MatchesSearch(string keyword);
         string GetSearchSummary();

@@ -48,13 +48,6 @@ namespace SmartLearn
 
         }
         static List<Course>Courses = new List<Course>();
-        static void InitializeCourses()
-        {
-            Courses.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith",20,0, "Programming",450, "https.//smartLearn.com/stream","Unlimited"));
-            Courses.Add(new OnlineCourse(102,"Python for Beginners","Learn Python programming from the basics.","Prof. Johnson","Programming",360));
-            Courses.Add(new OnlineCourse(103,"Web Development Basics","Learn the basics of HTML, CSS and web development.","Prof. Williams","Web Development",540));
-            Courses.Add(new OnlineCourse(104,"Data Structures","Learn arrays, lists, stacks, queues and other data structures.","Prof. Brown","Computer Science",600));
-            Courses.Add(new OnlineCourse(105,"Machine Learning Intro","Introduction to machine learning concepts and techniques.","Prof. Davis","Machine Learning",720));
-        }
+        
     }
 }
