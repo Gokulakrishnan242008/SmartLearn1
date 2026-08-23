@@ -12,7 +12,9 @@ namespace SmartLearn
         private List<int> ratings = new List<int>();
         private List<string> reviews = new List<string>();
         public int CourseId { get; set; }
+        
         public string Title { get; set; }
+        public  Instructor instructor { get; set; }
         private string title 
         { get { return Title; }
             set
@@ -89,7 +91,7 @@ namespace SmartLearn
                     notifiable.RecieveNotification($"Successfully enrolled in {Title}");
                 }
             }
-            if(Instructor is INotifiable instructorNotifiable)
+            if(instructor is INotifiable instructorNotifiable)
             {
                 instructorNotifiable.SendNotification($"{student.Username}has enrolled in your course:{Title}");
             }
@@ -177,7 +179,8 @@ namespace SmartLearn
                 Console.WriteLine("❌ You cannot enroll in this course.");
                 return;
             }
-            User currentUser = Active();
+           
+            User currentUser = currentUser;
             // Polymorphic Enroll()
             if (currentUser is Student student)
             {
