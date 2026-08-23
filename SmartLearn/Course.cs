@@ -83,7 +83,7 @@ namespace SmartLearn
             if (CanEnroll(student))
             {
                 CurrentEnrollments++;
-                student.EnrollInCourse();
+                student.EnrollInCourse(CourseId);
                 if (student is INotifiable notifiable)
                 {
                     notifiable.RecieveNotification($"Successfully enrolled in {Title}");
@@ -153,6 +153,7 @@ namespace SmartLearn
                 Console.WriteLine();
                 course.DisplayCourseInfo();
 
+
                 Console.WriteLine($"Can Enroll: {(course.CanEnroll() ? "Yes" : "No")}");
                 Console.WriteLine("──────────────────────────────────────────────────");
             }
@@ -160,8 +161,9 @@ namespace SmartLearn
             Console.Write("\nEnter Course ID to enroll: ");
             string courseId = Console.ReadLine();
 
+
             // Find selected course
-            Course selectedCourse = courses.FirstOrDefault(c => c.CourseId.Equals(courseId, StringComparison.OrdinalIgnoreCase));
+            Course selectedCourse = courses.FirstOrDefault(CourseId == courseId);
 
             if (selectedCourse == null)
             {
@@ -175,7 +177,7 @@ namespace SmartLearn
                 Console.WriteLine("❌ You cannot enroll in this course.");
                 return;
             }
-
+            User currentUser = Active();
             // Polymorphic Enroll()
             if (currentUser is Student student)
             {

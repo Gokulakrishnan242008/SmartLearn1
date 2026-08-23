@@ -89,7 +89,11 @@ namespace SmartLearn
             Console.WriteLine("Password changed successfully");
 
         }
-
+        public void Active()
+        {
+            IsActive= true;
+            Console.WriteLine("Account Activated");
+        }
         public void Deactive()
         {
             IsActive = false;

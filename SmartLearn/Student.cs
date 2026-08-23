@@ -88,12 +88,12 @@ public abstract class  Student : User,ISearchable,INotifiable
             Console.WriteLine("❌ Not enrolled in this course!");
         }
     }
-    public void EnrollInCourse(int courseId)
+    public  void EnrollInCourse(int CourseId)
     {
-        if (!EnrolledCourseIds.Contains(courseId))
+        if (!EnrolledCourseIds.Contains(CourseId))
         {
-            EnrolledCourseIds.Add(courseId);
-            CourseProgress[courseId] = 0; // Initialize progress to 0%
+            EnrolledCourseIds.Add(CourseId);
+            CourseProgress[CourseId] = 0; // Initialize progress to 0%
             Console.WriteLine("✓ Successfully enrolled!");
         }
         else

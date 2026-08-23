@@ -114,4 +114,8 @@ public abstract class Instructor : User,INotifiable
         return new List<string>(notifications);
 
     }
+    public List<string>RecieveNotification()
+    {
+        return new List<string>();
+    }
 }
