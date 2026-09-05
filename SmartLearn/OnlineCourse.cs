@@ -15,7 +15,7 @@ namespace SmartLearn
         public string Capacity {  get; private set; }
         public int CurrentStudents { get; set; }
 
-            public OnlineCourse(int courseId,string title,string description,string instructorName,int maxStudents,int currentEnrollments,string category,int videoDurationMinutes,int streamUrl,string capacity,int currentStudents):base(courseId,title,description,instructorName,maxStudents,currentEnrollments,category,currentStudents)
+            public OnlineCourse(int courseId,string title,string description,string instructorName,int maxStudents,int currentEnrollments,string category,int videoDurationMinutes,string streamUrl,string capacity,int currentStudents):base(courseId,title,description,instructorName,maxStudents,currentEnrollments,category,currentStudents)
         {
             VideoDurationMinutes = videoDurationMinutes;
             StreamUrl = "https.//smartLearn.com/stream"+CourseId;

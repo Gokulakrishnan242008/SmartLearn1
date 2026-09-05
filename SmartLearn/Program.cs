@@ -10,7 +10,7 @@ class Program
     static List<User> users = new List<User>();
     static List<Course> courses = new List<Course>();
     static List<Enrollment> enrollments = new List<Enrollment>();
-     bool isLoggedIn = false;
+    bool isLoggedIn = false;
     static User currentUser = null;
 
     static void Main(string[] args)
@@ -29,11 +29,13 @@ class Program
         courses.Add(new InPersonCourse(201, "Database Design Workshop", "Learn the basics of programming using C#", "John Smith", 25, 0, "Computer Science", 0, 101, "Room A"));
         courses.Add(new InPersonCourse(202, "Network Security Lab", "Practical Laboratory sessions covering network security", "John steve", 20, 0, "Web Development", 0, 205, "Room C"));
         courses.Add(new InPersonCourse(203, "Mobile App Development", "Learn the fundamentals of mobile application development ", "John keyn", 30, 0, "Web Development", 0, 301, "Room A"));
-        courses.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith", 20, 0, "Programming", 450, "https.//smartLearn.com/stream", "Unlimited"));
-        courses.Add(new OnlineCourse(102, "Python for Beginners", "Learn Python programming from the basics.", "Prof. Johnson", "Programming", 360));
-        courses.Add(new OnlineCourse(103, "Web Development Basics", "Learn the basics of HTML, CSS and web development.", "Prof. Williams", "Web Development", 540));
-        courses.Add(new OnlineCourse(104, "Data Structures", "Learn arrays, lists, stacks, queues and other data structures.", "Prof. Brown", "Computer Science", 600));
-        courses.Add(new OnlineCourse(105, "Machine Learning Intro", "Introduction to machine learning concepts and techniques.", "Prof. Davis", "Machine Learning", 720));
+        courses.Add(new OnlineCourse(101, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith", 20, 0, "Programming", 450, "https.//smartLearn.com/stream", "Unlimited",0));
+        courses.Add(new OnlineCourse(102, "Python for Beginners", "Learn Python programming from the basics.", "Prof. Johnson",25,0, "Programming", 360, "https.//smartLearn.com/stream", "Unlimited", 0));
+        courses.Add(new OnlineCourse(103, "Web Development Basics", "Learn the basics of HTML, CSS and web development.", "Prof. Williams",26,0, "Web Development", 540, "https.//smartLearn.com/stream", "Unlimited", 0));
+        courses.Add(new OnlineCourse(104, "Data Structures", "Learn arrays, lists, stacks, queues and other data structures.", "Prof. Brown",27,0, "Computer Science", 600, "https.//smartLearn.com/stream", "Unlimited", 0));
+        courses.Add(new OnlineCourse(105, "Machine Learning Intro", "Introduction to machine learning concepts and techniques.", "Prof. Davis",28,0, "Machine Learning", 720, "https.//smartLearn.com/stream", "Unlimited", 0));
+        courses.Add(new HybridCourse(301, "Full-Stack Development", "Learn data science concepts and techniques", "Prof. Smith", 30, 0, "Data Science", 0, 720, 101, "Building A", new List<DateTime> { new DateTime(2024, 6, 1, 9, 0, 0), new DateTime(2024, 6, 8, 9, 0, 0) }));
+        courses.Add(new HybridCourse(302, "Web Development Bootcamp", "Learn web development concepts and techniques", "Prof. Johnson", 25, 0, "Web Development", 0, 600, 205, "Building B", new List<DateTime> { new DateTime(2024, 6, 2, 10, 0, 0), new DateTime(2024, 6, 9, 10, 0, 0) }));
     }
     static bool ShowMainMenu()
     {
@@ -189,7 +191,7 @@ class Program
                 Console.WriteLine("incorrect course number.Please enter valid course number from the list");
             }
             Course obj = courses.Find(c => c.CourseId == courseId);
-            bool c1 = obj.CanEnroll();
+            bool c1 = obj.CanEnroll(Student student);
             if (users.Exists(e => e.Username == currentUser.Username ))
             {
                 if (c1 == false)

@@ -34,12 +34,7 @@ namespace SmartLearn
             OnlineVideoDuration = onlineVideoDuration;
             InPersonSessions = inPersonSessions;
         }
-        static List<Course> course = new List<Course>();
-        static void InitializeCourses()
-        {
-            course.Add(new HybridCourse(301, "Full-Stack Development", "Learn data science concepts and techniques", "Prof. Smith", 30, 0, "Data Science", 0, 720, 101, "Building A", new List<DateTime> { new DateTime(2024, 6, 1, 9, 0, 0), new DateTime(2024, 6, 8, 9, 0, 0) }));
-            course.Add(new HybridCourse(302, "Web Development Bootcamp", "Learn web development concepts and techniques", "Prof. Johnson", 25, 0, "Web Development", 0, 600, 205, "Building B", new List<DateTime> { new DateTime(2024, 6, 2, 10, 0, 0), new DateTime(2024, 6, 9, 10, 0, 0) }));
-        }
+        
         public  bool CanEnroll(Student student)
         {
             if (CurrentEnrollments < MaxStudents)

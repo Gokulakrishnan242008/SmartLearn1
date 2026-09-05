@@ -12,6 +12,7 @@ namespace SmartLearn
         private List<int> ratings = new List<int>();
         private List<string> reviews = new List<string>();
         public int CourseId { get; set; }
+        static User currentUser = null;
         
         public string Title { get; set; }
         public  Instructor instructor { get; set; }
@@ -172,21 +173,19 @@ namespace SmartLearn
                 Console.WriteLine("Course not found.");
                 return;
             }
-
+            // Polymorphic Enroll()
+            if (currentUser is not Student student)
+            {
+                Console.WriteLine("Only students can enroll in courses");
+                return;
+            }
             // Polymorphic CanEnroll()
-            if (!selectedCourse.CanEnroll())
+            if (!selectedCourse.CanEnroll(student))
             {
                 Console.WriteLine("❌ You cannot enroll in this course.");
                 return;
             }
-           
-            User currentUser = currentUser;
-            // Polymorphic Enroll()
-            if (currentUser is Student student)
-            {
-                selectedCourse.Enroll(student);
-            }
-
+            selectedCourse.Enroll(student);
             Console.WriteLine("✅ Enrollment completed successfully!");
         }
 
