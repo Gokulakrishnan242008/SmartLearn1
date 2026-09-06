@@ -8,6 +8,6 @@ namespace SmartLearn
     {
      public   abstract void SendNotification(string message);
         public List<string> GetNotificationHistory();
-        public List<String>RecieveNotification(string message);
+        public void  RecieveNotification(string message);
     }
 }

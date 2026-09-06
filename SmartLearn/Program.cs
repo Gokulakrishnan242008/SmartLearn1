@@ -12,6 +12,7 @@ class Program
     static List<Enrollment> enrollments = new List<Enrollment>();
     bool isLoggedIn = false;
     static User currentUser = null;
+    static List<Student>student=new List<Student>();
 
     static void Main(string[] args)
     {
@@ -191,7 +192,7 @@ class Program
                 Console.WriteLine("incorrect course number.Please enter valid course number from the list");
             }
             Course obj = courses.Find(c => c.CourseId == courseId);
-            bool c1 = obj.CanEnroll(Student student);
+            bool c1 = obj.CanEnroll();
             if (users.Exists(e => e.Username == currentUser.Username ))
             {
                 if (c1 == false)
@@ -248,18 +249,22 @@ class Program
                 return;
             }
 
+            // Enroll student 
+            if (currentUser is not Student student)
+            {
+                Console.WriteLine("only students can enroll in courses.");
+                return;
+            }
             // Check if student already enrolled 
             if (student.EnrolledCourseIds.Contains(courseId))
             {
                 Console.WriteLine("  Already enrolled in this course!");
                 return;
             }
-
-            // Enroll student 
             student.EnrollInCourse(courseId);
-
+           
             // Update course enrollment count 
-            Course seelectedCourse = courses.Find(c => c.CourseId == courseId);
+            Course selectedCourse = courses.Find(c => c.CourseId == courseId);
             selectedCourse.IncrementEnrollment();
 
             // Create enrollment record 

@@ -30,7 +30,7 @@ namespace SmartLearn
         }
         static List<Course> course = new List<Course>();
         
-        public bool CanEnroll(Student student)
+        public override bool CanEnroll()
         {
             if (CurrentEnrollments<MaxStudents)
             {

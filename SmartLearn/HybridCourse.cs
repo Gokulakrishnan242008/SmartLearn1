@@ -35,7 +35,7 @@ namespace SmartLearn
             InPersonSessions = inPersonSessions;
         }
         
-        public  bool CanEnroll(Student student)
+        public override bool CanEnroll()
         {
             if (CurrentEnrollments < MaxStudents)
             {
