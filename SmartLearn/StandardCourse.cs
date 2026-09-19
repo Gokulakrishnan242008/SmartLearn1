@@ -16,10 +16,16 @@ namespace SmartLearn
         public int CurrentStudents {  get; set; }
         public StandardCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,int currentStudents) : base(courseId, title, description, instructorName, maxStudents, currentEnrollments,category,currentStudents) { }
 
-        public override void DisplayCourseInfo()
+        public  void DisplayCourseInfo()
         {
             Console.WriteLine($"CourseId:{ CourseId}");
-            Console.WriteLine($"Title":{ }
+            Console.WriteLine($"Title:{Title}");
+            Console.WriteLine($"Description:{Description}");
+            Console.WriteLine($"InstructorName:{InstructorName}");
+            Console.WriteLine($"MaxStudents:{MaxStudents}");
+            Console.WriteLine($"CurrentEnrollments:{CurrentEnrollments}");
+            Console.WriteLine($"Category:{Category}");  
+            Console.WriteLine($"CurrentStudents:{CurrentStudents}");
         }
         public override int GetAvailableSeats()
         {
