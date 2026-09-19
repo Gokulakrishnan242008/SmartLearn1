@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Instructor : User,INotifiable
+public  class Instructor : User,INotifiable
 {
     public string Department {  get; set; }
     public List<Course> CoursesTeaching { get; set; }= new List<Course>();

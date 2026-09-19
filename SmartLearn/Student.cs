@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-public abstract class  Student : User,ISearchable,INotifiable
+public  class  Student : User,ISearchable,INotifiable
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
     public List<Course>EnrolledCourses= new List<Course>();
+    
     public void RecieveNotification(string message)
     {
        List<string> notifications = new List<string>();

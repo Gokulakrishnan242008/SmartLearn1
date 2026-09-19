@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Tracing;
 using System.Reflection;
+using System.Runtime.InteropServices.Java;
 
 namespace project;
 
@@ -13,7 +14,12 @@ class Program
     static List<Enrollment> enrollments = new List<Enrollment>();
     bool isLoggedIn = false;
     static User currentUser = null;
-    static List<Student> student = new List<Student>();
+   static List<Student> students = new List<Student>();
+   static Dictionary<int, Course> byCourseId = new Dictionary<int, Course>();
+    static Dictionary<string, User> byUsername= new Dictionary<string, User>();
+
+
+
 
     static void Main(string[] args)
     {
@@ -22,7 +28,45 @@ class Program
         new StandardCourse(3, "Mobile App Development", "Learn the fundamentals of mobile application development ", "John keyn", 30, 0, "Web Development",0);
         new StandardCourse(4, "C# Fundamentals", "Learn the Fundamentals of C# programming", "prof.smith", 20, 0, "Programming",0);
         new StandardCourse(5, "Python for Beginners", "Learn Python programming from the basics.", "Prof. Johnson", 25, 0, "Programming",0);
-        Console.WriteLine("Number of courses:"StandardCourse.Count);
+        Console.WriteLine("Number of courses:StandardCourse.Count");
+        courses.Insert(0,new StandardCourse(1,"Java for beginners ","Learn java programming from the basics ","prof.smith",20,0,"Computer Science",0));
+        Console.WriteLine("Number of courses:StandardCourse.Count");
+
+        new Student("Gokul", "gokul2410", "goku@gmail.com");
+        new Student("Nitish", "nitish1234", "nitish@gmail.com");
+        new Student("vijay", "vijay2326", "vijay@gmail.com");
+        Console.WriteLine("Number of students:Student.Count");
+        Student student = students.Find(c => c.Username == "Gokul");
+        if (student != null)
+        {
+            students.Remove(student);
+        }
+        Console.WriteLine("Number of students:student.Count");
+
+        new Instructor("prof smith", "smith1234", "smith@gmail.com");
+        new Instructor("prof Johnson", "John4563", "John@gmail.com");
+        new Instructor("prof kiki", "kiki6492", "kiki@gmail.com");
+
+       
+       static void AddCourse(Course course)
+        {
+            if(byCourseId.ContainsKey(course.CourseId))
+            {
+                Console.WriteLine("Course Id already exists");
+                return;
+            }
+            courses.Add(course);
+            byCourseId.Add(course.CourseId, course);
+        }
+        static void AddUser(User user)
+        {
+            if(byUsername.ContainsKey(user.Username))
+            {
+                Console.WriteLine("Username already exists");
+            }
+            users.Add(user);
+            byUsername.Add(user.Username, user);
+        }
         static bool ShowMainMenu()
         {
             Console.Clear();
@@ -153,6 +197,12 @@ class Program
             //   courses.Add(new Course(5, "Database Design and Management", "Learn database design principles", "Prof.Jones", 30, 0, "Database"));
             //   Console.WriteLine("✓ Sample courses loaded successfully!");
             //}
+            
+            foreach(Student student in students)
+            {
+                Console.WriteLine(student.Username);
+            }
+
 
             static void BrowseAndEnrollCourses()
             {

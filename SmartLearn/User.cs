@@ -19,7 +19,7 @@ namespace SmartLearn
                 if(value==null||value.Length<8)
                 {
 
-                    Console.WriteLine("Error:Password must be at leastv * characters long.");
+                    Console.WriteLine("Error:Password must be atleast 8 characters long.");
                     return;
                 }
                 if (!value.Any(char.IsDigit))
