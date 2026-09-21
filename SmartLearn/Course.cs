@@ -38,7 +38,7 @@ namespace SmartLearn
         public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
         public int CurrentStudents { get; set; }
-        
+        public List<Course> standardcourses = new List<Course>();
         public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,int currentStudents)
         {
             CourseId = courseId;
@@ -137,6 +137,7 @@ namespace SmartLearn
         public abstract int GetAvailableSeats();
         public abstract string GetCourseType();
         static List<Course> courses = new List<Course>();
+
         static void BrowseCourses()
         {
             Console.Clear();

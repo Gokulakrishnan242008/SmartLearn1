@@ -14,6 +14,7 @@ namespace SmartLearn
         public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
         public int CurrentStudents {  get; set; }
+        
         public StandardCourse(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,int currentStudents) : base(courseId, title, description, instructorName, maxStudents, currentEnrollments,category,currentStudents) { }
 
         public  void DisplayCourseInfo()
@@ -42,6 +43,10 @@ namespace SmartLearn
                 return true;
             }
             return false;
+        }
+        public List<Course> SearchCourses(string keyword)
+        {
+            return standardcourses.Where(c => c.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase) || (c.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase))).OrderBy(c => c.Title).ToList();
         }
     }
 

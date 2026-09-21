@@ -3,22 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-public  class  Student : User,ISearchable,INotifiable
+public class Student : User, ISearchable, INotifiable
 {
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
-    public List<Course>EnrolledCourses= new List<Course>();
-    
+    public List<Course> EnrolledCourses = new List<Course>();
+
     public void RecieveNotification(string message)
     {
-       List<string> notifications = new List<string>();
-    string notification = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}";
-    notifications.Add(notification);
+        List<string> notifications = new List<string>();
+        string notification = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}";
+        notifications.Add(notification);
         Console.WriteLine(notification);
     }
 
-    public int ProgressPercentage{ get; set;  }
+    public int ProgressPercentage { get; set; }
     private int progressPercentage
     {
         get { return ProgressPercentage; }
@@ -44,10 +44,10 @@ public  class  Student : User,ISearchable,INotifiable
     }
     public override void DisplayInfo()
     {
-            base.DisplayInfo();
+        base.DisplayInfo();
         Console.WriteLine($"enrolled courses;{enrollments.Count}");
     }
-    public List<int>GetCompletedCourses()
+    public List<int> GetCompletedCourses()
     {
         List<int> completedCourses = new List<int>();
         foreach (var courseId in EnrolledCourseIds)
@@ -88,7 +88,7 @@ public  class  Student : User,ISearchable,INotifiable
             Console.WriteLine("❌ Not enrolled in this course!");
         }
     }
-    public  void EnrollInCourse(int CourseId)
+    public void EnrollInCourse(int CourseId)
     {
         if (!EnrolledCourseIds.Contains(CourseId))
         {
@@ -116,7 +116,7 @@ public  class  Student : User,ISearchable,INotifiable
         }
     }
     public void UpdateProgress(int courseId, int progressPercentage)
-    {        }
+    { }
     public void EnrollInCourses(int courseId)
     {
         if (!EnrolledCourseIds.Contains(courseId))
@@ -146,26 +146,30 @@ public  class  Student : User,ISearchable,INotifiable
         Console.WriteLine("[5] Logout");
 
     }
-    public  bool MatchesSearch(string keyword)
-    { 
-        return Username.Contains(keyword,StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
-    } 
-    public  string GetSearchSummary()
+    public bool MatchesSearch(string keyword)
     {
-                return $"[Student]{Username}{Email}-{EnrolledCourses.Count}courses";
+        return Username.Contains(keyword, StringComparison.OrdinalIgnoreCase) || Email.ToLower().Contains(keyword.ToLower());
     }
-    private List<string>notifications=new List<string>();
+    public string GetSearchSummary()
+    {
+        return $"[Student]{Username}{Email}-{EnrolledCourses.Count}courses";
+    }
+    private List<string> notifications = new List<string>();
     public void SendNotification(string message)
     {
         string notificattion = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{message}";
         notifications.Add(notificattion);
         Console.WriteLine(notificattion);
     }
-    
-    public List <string>GetNotificationHistory()
-    { 
-        return new List<string>(notifications) ;
-            
+
+    public List<string> GetNotificationHistory()
+    {
+        return new List<string>(notifications);
+
     }
-    
+    public List<Course> SearchStudents(string keyword) 
+    {
+      return
+    }
+        
 }

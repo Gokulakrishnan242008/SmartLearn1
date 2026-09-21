@@ -1,8 +1,10 @@
 ﻿using SmartLearn;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics.Tracing;
 using System.Reflection;
 using System.Runtime.InteropServices.Java;
+using System.Security.Cryptography.X509Certificates;
 
 namespace project;
 
@@ -46,6 +48,7 @@ class Program
         new Instructor("prof smith", "smith1234", "smith@gmail.com");
         new Instructor("prof Johnson", "John4563", "John@gmail.com");
         new Instructor("prof kiki", "kiki6492", "kiki@gmail.com");
+        
 
        
        static void AddCourse(Course course)
@@ -60,13 +63,43 @@ class Program
         }
         static void AddUser(User user)
         {
-            if(byUsername.ContainsKey(user.Username))
+            if (byUsername.ContainsKey(user.Username))
             {
                 Console.WriteLine("Username already exists");
             }
             users.Add(user);
             byUsername.Add(user.Username, user);
         }
+        Console.Write("Enter CourseId:");
+        if (int.TryParse(Console.ReadLine(), out int courseid))
+        {
+            if (byCourseId.TryGetValue(courseId, out Course course))
+            {
+                Console.WriteLine($"Course found:{course.Title}");
+            }
+            else
+            {
+                Console.WriteLine("Course not found.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid Course Id");
+        }
+        Console.WriteLine("Enter Username:");
+        string  Username= Console.ReadLine();
+            if(byUsername.TryGetValue(Username,out User user))
+        {
+            Console.WriteLine($"User found :{user.Username}");
+
+        }
+        else
+        {
+            Console.WriteLine("User not found.");
+        }
+            
+        
+            
         static bool ShowMainMenu()
         {
             Console.Clear();
@@ -202,7 +235,7 @@ class Program
             {
                 Console.WriteLine(student.Username);
             }
-
+            
 
             static void BrowseAndEnrollCourses()
             {
@@ -391,7 +424,7 @@ class Program
                     }
                 }
             }
-
+           
             static void AddInstructorCourse(Instructor instructor)
             {
 
@@ -451,7 +484,7 @@ class Program
 
                 admin.DeactivateUser(userToDeactivate);
             }
-
+            
 
             //static void showstudentdashboard(Student)
             //{
@@ -573,6 +606,7 @@ class Program
 
         }
     }
+
 }
 
 
