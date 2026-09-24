@@ -5,6 +5,8 @@ using System.Text;
 
 public  class Instructor : User,INotifiable
 {
+    public string Username {  get; set; }
+   
     public string Department {  get; set; }
     public List<Course> CoursesTeaching { get; set; }= new List<Course>();
     public List<int> CreatedCourseIds { get; set; }
@@ -118,5 +120,9 @@ public  class Instructor : User,INotifiable
     {
         return  ;
     }
-    
+    public List<Instructor>Instructors=new List<Instructor>();
+    public List<Instructor>SearchInstructors(string keyword)
+        {
+        return Instructors.Where(c=>c.Username.Contains(keyword, StringComparison.OrdinalIgnoreCase) || c.Email.Contains(keyword,StringComparison.OrdinalIgnoreCase)||c.Department.Contains(keyword,StringComparison.OrdinalIgnoreCase)).ToList();
+            }
 }

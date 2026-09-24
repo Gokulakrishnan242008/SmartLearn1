@@ -48,6 +48,10 @@ namespace SmartLearn
         {
             return standardcourses.Where(c => c.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase) || (c.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase))).OrderBy(c => c.Title).ToList();
         }
+        public List<Course>FilterCoursesByCategory(string category)
+        {
+            return standardcourses.Where(c => c.Category.Equals(category, StringComparison.OrdinalIgnoreCase)).OrderBy(c=>c.CurrentEnrollments).ToList();
+        }
     }
 
 }

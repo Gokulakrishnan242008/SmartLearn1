@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 public class Student : User, ISearchable, INotifiable
 {
+   public string Description {  get; set; }
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
     List<Enrollment> enrollments { get; set; } = new List<Enrollment>();
@@ -167,9 +168,10 @@ public class Student : User, ISearchable, INotifiable
         return new List<string>(notifications);
 
     }
-    public List<Course> SearchStudents(string keyword) 
+    public List<Student>Students=new List<Student>();
+    public List<Student> SearchStudents(string keyword) 
     {
-      return
+      return Students.Where(c=>c.Username.Contains(keyword,StringComparison.OrdinalIgnoreCase)|| c.Description.Contains(keyword,StringComparison.OrdinalIgnoreCase)).OrderBy(c=>c.Username).ToList();
     }
         
 }
