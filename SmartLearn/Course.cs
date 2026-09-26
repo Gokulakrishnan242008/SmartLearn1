@@ -188,6 +188,21 @@ namespace SmartLearn
            selectedCourse.Enroll(student);
            Console.WriteLine("✅ Enrollment completed successfully!");
         }
-
+        public List<Course> GetPopularCourses(int count)
+        {
+            return standardcourses.OrderByDescending(c => c.CurrentEnrollments).Take(count).ToList();
+        }
+        public List<Course>GetCoursesNeedingstudents()
+        {
+            return standardcourses.Where(c=>c.CurrentEnrollments<5).ToList();
+        }
+        public List<Course>GetHighestRatedCourses(int count)
+        {
+            return standardcourses.OrderByDescending(s=>s.GetAverageRating()).Take(count).ToList();
+        }
+        public List<Course>GetCoursesByInstructor(string instructorName)
+        {
+            return standardcourses.Where(c=>c.InstructorName.Equals(instructorName,StringComparison.OrdinalIgnoreCase)).ToList();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 public class Student : User, ISearchable, INotifiable
 {
+    
    public string Description {  get; set; }
     public List<int> EnrolledCourseIds { get; set; }
     public Dictionary<int, int> CourseProgress { get; set; }
@@ -173,5 +174,26 @@ public class Student : User, ISearchable, INotifiable
     {
       return Students.Where(c=>c.Username.Contains(keyword,StringComparison.OrdinalIgnoreCase)|| c.Description.Contains(keyword,StringComparison.OrdinalIgnoreCase)).OrderBy(c=>c.Username).ToList();
     }
-        
+    public List<Student>GetTopStudents(int count)
+    {
+        return Students.OrderByDescending(s => s.ProgressPercentage).Take(count).ToList();
+    }
+    public List<Student>GetActiveStudents()
+    {
+        return Students.Where(s=>s.EnrolledCourses.Count>0).ToList();
+    }
+    public Dictionary<string, List<Student>> GetStudentsByPerformance()
+    {
+        return new Dictionary<string, List<Student>>
+        {
+            {"Low",Students.Where(s=>s.ProgressPercentage<50).ToList() },{"Medium",Students.Where(s=>s.ProgressPercentage>50&&s.ProgressPercentage<80).ToList()},{"High",Students.Where(s=>s.ProgressPercentage>=80).ToList()}
+        };
+    }
+    public double CalculateSystemAverageProgress()
+    {
+        if (Students.Count == 0)
+            return 0;
+        return Students.Average(s => s.ProgressPercentage);
+
+    }
 }
