@@ -204,5 +204,19 @@ namespace SmartLearn
         {
             return standardcourses.Where(c=>c.InstructorName.Equals(instructorName,StringComparison.OrdinalIgnoreCase)).ToList();
         }
+        public List<Course> GetCoursesByCategory(string category)
+        { 
+         return standardcourses.Where(c=>c.Category.Equals(category,StringComparison.OrdinalIgnoreCase)).OrderByDescending(c=>c.AddRating()).ToList();
+        }
+        public List<Course>GetMostEnrolledCategory()
+        {
+            return standardcourses.GroupBy(c => c.Category).OrderByDescending(g=>g.Sum(c=>c.CurrentEnrollments).Select(g.Key).FirstOrDefault());
+        }
+        public List<Course> AreAllCoursesFilled()
+        { 
+          return
+        }
+        
+        
     }
 }

@@ -196,4 +196,9 @@ public class Student : User, ISearchable, INotifiable
         return Students.Average(s => s.ProgressPercentage);
 
     }
+    public List<Student>HasStudentCompletedAny()
+    {
+        return Students.Any(s=>s.EnrolledCourses.Any(e=>e.ProgressPercentage==100)).ToList();
+    }
+    
 }
