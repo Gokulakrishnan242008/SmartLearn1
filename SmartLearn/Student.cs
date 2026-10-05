@@ -196,9 +196,20 @@ public class Student : User, ISearchable, INotifiable
         return Students.Average(s => s.ProgressPercentage);
 
     }
-    public List<Student>HasStudentCompletedAny()
-    {
-        return Students.Any(s=>s.EnrolledCourses.Any(e=>e.ProgressPercentage==100)).ToList();
-    }
     
+    public void DisplayStudentList(List<Student> students)
+    {
+        Console.WriteLine("╔══════════════════════════════════════════════════╗");
+        Console.WriteLine("║                  STUDENT LIST                     ║");
+        Console.WriteLine("╠══════════════════════════════════════════════════╣");
+        Console.WriteLine("║ Username           | Email              | Progress║");
+        Console.WriteLine("╠════════════════════╬════════════════════╬═════════╣");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"║ {student.Username,-18} | {student.Email,-18} | {student.ProgressPercentage,7}% ║");
+        }
+        Console.WriteLine("╚════════════════════╩════════════════════╩═════════╝");
+    }
+
+
 }

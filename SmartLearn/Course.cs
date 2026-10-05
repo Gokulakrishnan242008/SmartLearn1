@@ -38,6 +38,7 @@ namespace SmartLearn
         public int CurrentEnrollments { get; set; }
         public string Category { get; set; }
         public int CurrentStudents { get; set; }
+        public int ProgressPercentage{get; set; }
         public List<Course> standardcourses = new List<Course>();
         public Course(int courseId, string title, string description, string instructorName, int maxStudents, int currentEnrollments, string category,int currentStudents)
         {
@@ -213,10 +214,25 @@ namespace SmartLearn
             return standardcourses.GroupBy(c => c.Category).OrderByDescending(g=>g.Sum(c=>c.CurrentEnrollments).Select(g.Key).FirstOrDefault());
         }
         public List<Course> AreAllCoursesFilled()
-        { 
-          return
+        {
+            return ;
         }
-        
-        
+        public void DisplaySearchResults(List<Course> results)
+        {
+            if (results == null||results.Count == 0)
+            {
+                Console.WriteLine("No courses found .");
+                return;
+            }
+            Console.WriteLine("╔══════════════════════════════════════════════════╗");
+            Console.WriteLine("                  Search Results");
+            Console.WriteLine("╚══════════════════════════════════════════════════╝");
+            Console.WriteLine($"{"ID",-6 }{"Title",-25}{"Category",-15}{"Instructor",-20}{"Enrolled",-10}");
+            foreach(Course course in results)
+            {
+                Console.WriteLine($"{course.CourseId,-6}"+$"{course.Title,-25}"+$"{course.Category,-15}"+$"{course.InstructorName,-20}"+$"{course.CurrentEnrollments,-10}");
+            }
+        }
+
     }
 }
