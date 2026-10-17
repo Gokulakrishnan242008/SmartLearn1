@@ -22,6 +22,7 @@ namespace SmartLearn
             Capacity = "Unlimited";
             CurrentStudents = currentStudents;
         }
+
         public override bool CanEnroll() 
         { 
             return true;

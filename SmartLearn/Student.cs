@@ -210,6 +210,33 @@ public class Student : User, ISearchable, INotifiable
         }
         Console.WriteLine("╚════════════════════╩════════════════════╩═════════╝");
     }
+    public void GetStudentsByPerformanceLevel()
+    {
+        var groups = Students.GroupBy(s =>
+        {
+            if (s.ProgressPercentage < 50)
+                return "Low";
+            else if (s.ProgressPercentage < 80)
+                return "Medium";
+            else
+                return "High";
+        });
+        foreach (var group in groups)
+        {
+            Console.WriteLine($"\nCategory:{group.Key}");
+            Console.WriteLine($"Total Count:{group.Count()}");
+            Console.WriteLine("Student Usernames:");
+            foreach (var student in group)
+            {
+                Console.WriteLine(student.Username);
 
+            }
+        }
+    }
+            
+            
+        
+
+    
 
 }

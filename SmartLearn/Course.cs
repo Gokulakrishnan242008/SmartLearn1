@@ -219,7 +219,7 @@ namespace SmartLearn
         }
         public void DisplaySearchResults(List<Course> results)
         {
-            if (results == null||results.Count == 0)
+            if (results == null || results.Count == 0)
             {
                 Console.WriteLine("No courses found .");
                 return;
@@ -227,11 +227,17 @@ namespace SmartLearn
             Console.WriteLine("╔══════════════════════════════════════════════════╗");
             Console.WriteLine("                  Search Results");
             Console.WriteLine("╚══════════════════════════════════════════════════╝");
-            Console.WriteLine($"{"ID",-6 }{"Title",-25}{"Category",-15}{"Instructor",-20}{"Enrolled",-10}");
-            foreach(Course course in results)
+            Console.WriteLine($"{"ID",-6}{"Title",-25}{"Category",-15}{"Instructor",-20}{"Enrolled",-10}");
+            foreach (Course course in results)
             {
-                Console.WriteLine($"{course.CourseId,-6}"+$"{course.Title,-25}"+$"{course.Category,-15}"+$"{course.InstructorName,-20}"+$"{course.CurrentEnrollments,-10}");
+                Console.WriteLine($"{course.CourseId,-6}" + $"{course.Title,-25}" + $"{course.Category,-15}" + $"{course.InstructorName,-20}" + $"{course.CurrentEnrollments,-10}");
             }
+        }
+        public void GetCourseStatistics()
+        {
+            Console.WriteLine($"Number of Courses:StandardCourses.Count");
+            double average = CurrentStudents.Average(s => s.ProgressPercentage);
+            Console.WriteLine($"Average Progress:{average:F2}%");
         }
 
     }
