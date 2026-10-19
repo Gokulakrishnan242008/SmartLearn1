@@ -236,8 +236,26 @@ namespace SmartLearn
         public void GetCourseStatistics()
         {
             Console.WriteLine($"Number of Courses:StandardCourses.Count");
-            double average = CurrentStudents.Average(s => s.ProgressPercentage);
+            double average = Student.Average(s => s.ProgressPercentage);
             Console.WriteLine($"Average Progress:{average:F2}%");
+            Course highestCourse = StandardCourse.OrderByDescending(c => c.CurrentEnrollments).FirstOrDefault();
+            if (highestCourse != null) 
+            {
+                Console.WriteLine($"Highest Enrollment Course:{highestCourse.Title}");
+                Console.WriteLine($"Total Enrollment:{highestCourse.CurrentEnrollments}");
+            }
+            else
+            {
+                Console.WriteLine("No courses available");
+            }
+            Course lowestCourse=StandardCourse.OrderBy(c=>c.CurrentEnrollments).FirstOrDefault();
+            if (lowestCourse != null)
+            {
+                Console.WriteLine($"Lowest Enrollment Course:{lowestCourse.Title}");
+                Console.WriteLine($"Total Enrollment:{lowestCourse.CurrentEnrollments}");
+            }
+            else
+                Console.WriteLine("No courses available");
         }
 
     }
