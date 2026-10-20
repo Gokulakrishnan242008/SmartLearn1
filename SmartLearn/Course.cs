@@ -256,7 +256,17 @@ namespace SmartLearn
             }
             else
                 Console.WriteLine("No courses available");
+            var categorystats = StandardCourse.GroupBy(c => c.Category);
+            foreach (var group in categorystats) 
+            {
+                int totalEnrollments = group.Sum(c => c.CurrentEnrollments);
+                Console.WriteLine($"Category:{group.Key}");
+                Console.WriteLine($"Total Enrollments:{totalEnrollments}");
+                Console.WriteLine("------------");
+            }
+
         }
+
 
     }
 }
