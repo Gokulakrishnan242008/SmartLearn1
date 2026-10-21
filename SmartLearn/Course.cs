@@ -266,6 +266,24 @@ namespace SmartLearn
             }
 
         }
+        public void GetPaginatedCourses(int pageNumber,int pageSize)
+        {
+            var paginatedCourses = standardcourses.OrderBy(c => c.Title).ToList();
+            int totalCourses = paginatedCourses.Count;
+            int totalPages = (int)Math.Ceiling((double)totalCourses / pageSize);
+            if(pageNumber < 1 || pageNumber > totalPages)
+            {
+                Console.WriteLine("Invalid page number");
+                return;
+            }
+            var coursesToDisplay = paginatedCourses.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            foreach (var Course in paginatedCourses)
+            {
+                Course.DisplayCourseInfo();
+            }
+            Console.WriteLine($"Page {pageNumber} of {totalPages}");
+            Console.WriteLine($"Showing {Math.Min(pageSize, totalCourses - (pageNumber - 1) * pageSize)}of{totalCourses}courses on this page.");
+        }
 
 
     }
